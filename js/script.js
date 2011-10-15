@@ -51,7 +51,7 @@
 							return false;
 						}).attr('title', 'easter egg');
 
-					if ( startCanvasOpen ) {
+					if ( window.startCanvasOpen ) {
 						$html5.click();
 					}
 				}, 3000);
