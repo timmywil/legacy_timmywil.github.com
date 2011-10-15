@@ -77,8 +77,6 @@
             
             <h3>Why won't qwery work?</h3>
             
-            <p>You might be asking why qwery won't work in jQuery. I was excited to see if it would work, but it is really not realistic.</p>
-            
             <ol>
             <li>The chunker cannot handle multiple pseudos or attribute selectors. Supporting this would require a complete rewrite of the engine. qwery tries to split up a selection all at once and passes the parts to the interpret function, which is great but makes it impossible to support multiple pseudos or attrs. This is also explained on qwery's <a href="http://dustindiaz.com/qwery">homepage</a>.</li>
             <li>child selectors require a more complex filter and probably a prefilter in order to do things like :nth-child(2n+1) or :nth-child(-n+6), which qwery cannot do</li>
@@ -113,7 +111,7 @@
             <li>There is no need to have the cache Object with a getter and setter on a prototype. Save the function calls and simply use <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L243">plain objects for your caches</a>.</li>
             <li>Don't use an attrCache. qwery will get <a href="http://jsperf.com/sizzle-attr-vs-qwery-attr">better performance</a> with a <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L153">ternary</a> even when the regex has been cached. There are many things faster than a regex test so keep in mind the equivalent possibilities.</li>
             <li>Similar to attrCache, <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L190">string concatenation + indexOf</a> for testing classes is faster than regex testing even when cached.</li>
-            <li>Consider catching the DOM exceptions on querySelectorAll(which are never descriptive), attempting the selection, then giving the user an idea of what went wrong. See the <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L470">select changes</a> and <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L202">an example of using a qwery.error</a>.  You'll find this will not only give your user an indication of what funny selection was passed, but actually fix many selector bugs across browsers for free (no need for the css3support test anymore either). <span class="smile">;)</span></li>
+            <li>Consider catching the DOM exceptions on querySelectorAll(which are never descriptive), attempting the selection, then giving the user an idea of what went wrong. See the <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L470">select changes</a> and <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L202">an example of using a qwery.error</a>.  You'll find this will not only give your user an indication of what funny selection was passed, but actually fix many selector bugs across browsers for free (no need for the css3support test anymore either).</li>
             </ol>
           </div>
         </article>
