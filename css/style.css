@@ -298,7 +298,7 @@ input:invalid,textarea:invalid,input.invalid,textarea.invalid {
 ----------------------------------*/
 #nav {
     background: rgba(51, 120, 153, 0.5);
-    width: 460px;
+    width: 520px;
     height: 85px;
     text-align: center;
     float: right;
@@ -335,7 +335,7 @@ input:invalid,textarea:invalid,input.invalid,textarea.invalid {
        -moz-border-radius: 5px;
             border-radius: 5px;
     padding: 0 0.6em 0.2em;
-    font-size: 1.4em !important;
+    font-size: 1.2em !important;
 }
 
 #nav a:hover {
