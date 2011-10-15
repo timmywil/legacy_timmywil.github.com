@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QUnit Test Suite</title>
+	<link rel="stylesheet" href="../qunit/qunit.css" type="text/css" media="screen">
+	<script type="text/javascript" src="../qunit/qunit.js"></script>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery.password123.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="test.js"></script>
+</head>
+<body>
+	<h1 id="qunit-header">QUnit Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">
+		<form action="#" id="form">
+			<input id="password1" type="password" name="password1" placeholder="placeholder">
+			<input id="password2" type="password" name="password2" value="value" placeholder="placeholder">
+			<input id="text1" type="text">
+			<input class="password_disabled" type="password" name="password_disabled" disabled="true">
+			<input id="password_attrs" type="password" size="12" maxlength="30" readonly="true" tabindex="1" class="testing a bunch of classes">
+			<input id="password3" type="password" placeholder="placeholder">
+			<input id="password_mask" type="password" value="mask">
+			<input id="password_destroy" type="password" value="old value">
+			<input id="password_option" type="password" placeholder="placeholder">
+		</form>
+	</div>
+</body>
+</html>
