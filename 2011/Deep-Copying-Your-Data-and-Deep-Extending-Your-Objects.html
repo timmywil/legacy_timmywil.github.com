@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8' />
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+  <title>timmy willison</title>
+  <meta content="timmy willison's personal website and blog" name='description' />
+  <meta content='timmy willison personal website blog jquery tim jQuery core portfolio javascript html css html5 css3' name='keywords' />
+  <meta content='timmy willison' name='author' />
+  <!--[if IE]>
+    <meta content='no' http-equiv='imagetoolbar' />
+  <![endif]-->
+  <link href='/favicon.ico' rel='shortcut icon' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <link href='/css/style.css?v=2' rel='stylesheet' />
+  <script src='/js/libs/modernizr-1.6.min.js'></script>
+</head>
+<body>
+  <header id='header'>
+      <hgroup>
+        <a href='/' id='logo'>timmy willison</a>
+        <h2><a target="_blank" href="http://thisismedium.com/">Web</a> developer, <a target="_blank" href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a target="_blank" href="http://css3please.com/">css3</a> fanatic</h2>
+        <nav class='start' id='nav'>
+          <ul>
+            <li>
+              <a href='/samples/password123/'>jQuery password123</a>
+            </li>
+            <li>
+              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+            </li>
+            <li>
+              <a href='/pres/operators/'>Rare Javascript Operators</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/timmywil'>@timmywil</a>
+            </li>
+            <li>
+              <a href='http://github.com/timmywil'>Github</a>
+            </li>
+          </ul>
+        </nav>
+      </hgroup>
+    </header>
+  <div id='container'>
+    <section id='blog'>
+      <article>
+        <header class='clearfix'>
+          <h1>Deep Copying Your Data and Deep Extending Your Objects</h1>
+          <h5 class='date'>2/21/2011</h5>
+        </header>
+        <div class='content'>
+          <p>The <a href="http://api.jquery.com/clone">docs for jQuery.clone</a> were recently updated to reflect the way jQuery clones data. I thought this subject could use even more clarification. By default, jQuery copies only the top level of an element's data. That means if you have an array or object within the data object, that will still be a direct reference and when you change one, the other changes with it.</p>
+            <p>For a demonstration, see <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/4/">http://jsfiddle.net/timmywil/uvpPw/4/</a>. Notice that the alerts will be the same.</p>
+            <p>If we don't want that, we can fix this ourselves by creating a new array or object with jQuery.extend. Do not be confused. The words "deep copy" below refer to deep copying data, not doing a deep extend (which in a way is the opposite); that we will discuss afterwards.</p>
+            <pre name="code" class="javascript">
+            var $elem = $('#elem').data( "arr": [ 1 ] ), // Original element with attached data
+                $clone = $elem.clone( true )
+                  .data( "arr", $.extend( [], $elem.data("arr") ) ); // Deep copy to prevent data sharing
+            </pre>
+            <div class='note'>Now see this working: <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/3/">http://jsfiddle.net/timmywil/uvpPw/3/</a>. The original button's data is kept intact.</div>
+            <h3>
+              <i>Deep Extends</i>
+            </h3>
+            <p>I didn't quite understand what it meant to do a deep extend so I dug through the source and <a target="_blank" href="http://jsfiddle.net/timmywil/dfQS6/">played around a bit</a>. With a deep copy, we want to avoid passing around references so that our original data is not linked with cloned data. With a deep extend, we <i>want</i> our new object to contain <b>direct references</b> to the objects contained in the originals.</p>
+            <p>In the demo, you'll notice that only after the deep extend does "littleObj" get updated whenever our new extended object is updated. This is very useful for updating data that may be outside the scope of a particular function you are working in, linking data for events, or writing your very own data link plugin. <span class="smile">=)</span></p>
+        </div>
+      </article>
+    </section>
+    <section id='sidebar'>
+        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+        </a>
+      </section>
+    <footer id='footer'>
+      <p>
+        copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
+      </p>
+    </footer>
+  </div>
+  <!-- end of container -->
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      !window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.6.1.min.js"%3E%3C/script%3E'));
+    //]]>
+  </script>
+  <script src='/js/plugins.js' type='text/javascript'></script>
+  <script src='/js/script.js' type='text/javascript'></script>
+  
+  <!--[if lt IE 7 ]>
+    <script src="/js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <!-- asynchronous google analytics -->
+  <script type='text/javascript'>
+    //<![CDATA[
+      var _gaq = [['_setAccount', 'UA-15918109-1'], ['_trackPageview']];
+      (function(d, t) {
+       var g = d.createElement(t),
+      		 s = d.getElementsByTagName(t)[0];
+       g.async = true;
+       g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g, s);
+      })(document, 'script');
+    //]]>
+  </script>
+  
+</body>
+</html>

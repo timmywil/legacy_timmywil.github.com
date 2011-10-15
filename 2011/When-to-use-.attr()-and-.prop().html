@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8' />
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+  <title>timmy willison</title>
+  <meta content="timmy willison's personal website and blog" name='description' />
+  <meta content='timmy willison personal website blog jquery tim jQuery core portfolio javascript html css html5 css3' name='keywords' />
+  <meta content='timmy willison' name='author' />
+  <!--[if IE]>
+    <meta content='no' http-equiv='imagetoolbar' />
+  <![endif]-->
+  <link href='/favicon.ico' rel='shortcut icon' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <link href='/css/style.css?v=2' rel='stylesheet' />
+  <script src='/js/libs/modernizr-1.6.min.js'></script>
+</head>
+<body>
+  <header id='header'>
+      <hgroup>
+        <a href='/' id='logo'>timmy willison</a>
+        <h2><a target="_blank" href="http://thisismedium.com/">Web</a> developer, <a target="_blank" href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a target="_blank" href="http://css3please.com/">css3</a> fanatic</h2>
+        <nav class='start' id='nav'>
+          <ul>
+            <li>
+              <a href='/samples/password123/'>jQuery password123</a>
+            </li>
+            <li>
+              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+            </li>
+            <li>
+              <a href='/pres/operators/'>Rare Javascript Operators</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/timmywil'>@timmywil</a>
+            </li>
+            <li>
+              <a href='http://github.com/timmywil'>Github</a>
+            </li>
+          </ul>
+        </nav>
+      </hgroup>
+    </header>
+  <div id='container'>
+    <section id='blog'>
+      <article>
+        <header class='clearfix'>
+          <h1>When to use <code>.attr()</code> and <code>.prop()</code></h1>
+          <h5 class='date'>5/9/2011</h5>
+        </header>
+        <div class='content'>
+          <p>Below is basically a copy of the jQuery blog post, but with a few additions. Feel free to ask me any questions.</p>
+            <h2>Upgrading</h2>
+            <p>With the introduction of the new <code>.prop()</code> method and the changes to the <code>.attr()</code> method, jQuery 1.6 sparked a discussion about the difference between attributes and properties and how they relate to each other. It also came with some backwards compatibility issues that have been fixed in 1.6.1. When updating from 1.5.2 to 1.6.1, you should not have to change any attribute code.</p>
+            <p>Below is a description of the changes to the Attributes module in jQuery 1.6 and 1.6.1, as well as the <i>preferred</i> usage of the <code>.attr()</code> method and the <code>.prop()</code> method. However, as previously stated, jQuery 1.6.1 will allow you to use .attr() just as it was used before in all situations.</p>
+            <h2>Changes</h2>
+            <p>The changes to the Attributes module removed the ambiguity between attributes and properties, but caused some confusion in the jQuery community, since all versions of jQuery prior to 1.6 have handled attributes and properties in one method(<code>.attr()</code>).  The old <code>.attr()</code> method had many bugs and was hard to maintain.</p>
+            <p>The release of 1.6.1 comes with several bug fixes as well as an update to the Attributes module.</p>
+            <p>Specifically, boolean attributes such as <strong>checked, selected, readonly, multiple, and disabled</strong> in 1.6.1 will be treated just as they used to be treated in jQuery versions prior to 1.6.  This means that code such as</p>
+            <pre name="code" class="javascript">
+            $(":checkbox").attr("checked", true);
+            $("option").attr("selected", true);
+            $("input").attr("readonly", true);
+            $("select").attr("multiple", true);
+            $("input").attr("disabled", true);
+            </pre>
+            <p>will not need to be changed in 1.6.1 in order to work as previously expected.</p>
+            <p>To make the changes to <code>.attr()</code> clear, here are some examples of the use cases of <code>.attr()</code> that worked in previous versions of jQuery that should be switched to use <code>.prop()</code> instead:</p>
+            <table class='table'>
+              <tr>
+                <th><code>.attr()</code></th>
+                <th>Proper <code>.prop()</code> usage</th>
+              </tr>
+              <tr>
+                <td>$(window).attr...</td>
+                <td>$(window).prop...</td>
+              </tr>
+              <tr>
+                <td>$(document).attr...</td>
+                <td>$(document).prop...</td>
+              </tr>
+              <tr>
+                <td>$(":checkbox").attr("checked", true);</td>
+                <td>$(":checkbox").prop("checked", true);</td>
+              </tr>
+              <tr>
+                <td>$("option").attr("selected", true);</td>
+                <td>$("option").prop("selected", true);</td>
+              </tr>
+            </table>
+            <p>First, using the <code>.attr()</code> method on the window or document did not work in jQuery 1.6 because the window and document cannot have attributes. They contain properties (such as location or readyState) that should be manipulated with <code>.prop()</code> or simply with raw javascript. In jQuery 1.6.1, the <code>.attr()</code> will defer to the <code>.prop()</code> method for both the window and document instead of throwing an error.</p>
+            <p>Next, checked, selected, and other boolean attributes previously mentioned are receiving special treatment because of the special relationship between these attributes and their corresponding properties. Basically, an attribute is what you see in the html:</p>
+            <pre name="code" class="javascript">
+            &lt;input type="checkbox" checked="checked"&gt;
+            </pre>
+            <p>Boolean attributes such as checked only set the default or <i>initial</i> value. In the case of a checkbox, the checked attribute sets whether the checkbox should be checked when the page loads.</p>
+            <p>Properties are what the browser uses to keep track of the <strong>current</strong> values.  These are retrievable and settable only with javascript.</p>
+            <pre name="code" class="javascript">
+            $(":checkbox").get(0).checked = true;
+            // Is the same as $(":checkbox:first").prop("checked", true);
+            </pre>
+            <p>In jQuery 1.6, setting checked with</p>
+            <pre name="code" class="javascript">
+            $(":checkbox").attr("checked", true);
+            </pre>
+            <p>would not check the checkbox because it was the property that needed to be set.</p>
+            <p>However, once jQuery 1.6 was released, the jQuery team understood that it was not particularly useful to set something that the browser was only concerned with on page load.  Therefore, in the interest of backwards compatibility, we will continue to be able to set these boolean attributes with the <code>.attr()</code> method in jQuery 1.6.1.</p>
+            <p>The most common boolean attributes are <strong>checked, selected, disabled, and readOnly</strong>, but here is a full list of boolean properties compiled from the W3C specificiation:</p>
+            <pre>autobuffer, autofocus, autoplay, async, checked, compact, controls, declare, defaultMuted, defaultSelected, defer, disabled, draggable, formNoValidate, hidden, indeterminate, isMap, itemscope, loop, multiple, muted, noHref, noResize, noShade, noWrap, noValidate, open, pubDate, readOnly, required, reversed, scoped, seamless, selected, spellcheck, trueSpeed, visible.</pre>
+            <p>For various reasons, jQuery does not and cannot support setting all of these boolean properties and attributes with <code>.attr()</code>, but here is the list of the ones jQuery does support setting with <code>.attr()</code>.</p>
+            <pre>autofocus, autoplay, async, checked, controls, defer, disabled, hidden, loop, multiple, open, readonly, required, scoped, selected</pre>
+            <p>It is still recommended that <code>.prop()</code> be used when setting these boolean attributes/properties, but your code will not break in jQuery 1.6.1 even if these use cases are not switched to <code>.prop()</code>.</p>
+            <p>Below is a list of some attributes and properties and which method should normally be used when getting or setting them. This is the <i>preferred</i> usage, but the .attr() method will work in all attribute cases.</p>
+            <p>Note that some DOM Element properties are also listed below - but will only work with the new .prop() method.</p>
+            <table class='table'>
+              <tr>
+                <th>Attribute/Property</th>
+                <th><code>.attr()</code></th>
+                <th><code>.prop()</code></th>
+              </tr>
+              <tr>
+                <td>accesskey</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>align</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>async</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>autofocus</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>checked</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>class</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>contenteditable*</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>defaultValue</td>
+                <td></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>draggable*</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>href</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>id</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>label</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>location**</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>multiple</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>name</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>nodeName</td>
+                <td></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>nodeType</td>
+                <td></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>readOnly</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>rel</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>selected</td>
+                <td><span style="color:#aaa">&#10003</span></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>src</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>tabindex</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>tagName</td>
+                <td></td>
+                <td>&#10003;</td>
+              </tr>
+              <tr>
+                <td>title</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>type</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>width***</td>
+                <td>&#10003;</td>
+                <td></td>
+              </tr>
+            </table>
+            <p>
+              * These are <i>enumerated attributes</i>. These are sometimes confused with boolean attributes, but their corresponding property values are of type <code>string</code>, not <code>boolean</code>.<br>
+              ** i.e. window.location <br> *** If needed over <code>.width()</code>
+            </p>
+            <div class='note'>Neither <code>.attr()</code> or <code>.prop()</code> should be used for getting/setting <strong>value</strong>.  Use the <code>.val()</code> method instead.</div>
+            <h3>Summary</h3>
+            <p>The <code>.prop()</code> method should be used for boolean attributes/properties and for properties which do not exist in html (such as window.location).  All other attributes (ones you can see in the html) can and should continue to be manipulated with the <code>.attr()</code> method.</p>
+            <p>One nice thing to keep in mind: you will have significantly improved performance regardless of which function you use. For boolean attributes, it's faster to use the <code>.prop()</code> method, but for other attributes, using <code>prop</code> will not give you much of a performance gain, nor will it have attribute hooks.</p>
+        </div>
+      </article>
+    </section>
+    <section id='sidebar'>
+        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+        </a>
+      </section>
+    <footer id='footer'>
+      <p>
+        copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
+      </p>
+    </footer>
+  </div>
+  <!-- end of container -->
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      !window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.6.1.min.js"%3E%3C/script%3E'));
+    //]]>
+  </script>
+  <script src='/js/plugins.js' type='text/javascript'></script>
+  <script src='/js/script.js' type='text/javascript'></script>
+  
+  <!--[if lt IE 7 ]>
+    <script src="/js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <!-- asynchronous google analytics -->
+  <script type='text/javascript'>
+    //<![CDATA[
+      var _gaq = [['_setAccount', 'UA-15918109-1'], ['_trackPageview']];
+      (function(d, t) {
+       var g = d.createElement(t),
+      		 s = d.getElementsByTagName(t)[0];
+       g.async = true;
+       g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g, s);
+      })(document, 'script');
+    //]]>
+  </script>
+  
+</body>
+</html>

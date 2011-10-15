@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8' />
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+  <title>timmy willison</title>
+  <meta content="timmy willison's personal website and blog" name='description' />
+  <meta content='timmy willison personal website blog jquery tim jQuery core portfolio javascript html css html5 css3' name='keywords' />
+  <meta content='timmy willison' name='author' />
+  <!--[if IE]>
+    <meta content='no' http-equiv='imagetoolbar' />
+  <![endif]-->
+  <link href='/favicon.ico' rel='shortcut icon' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <link href='/css/style.css?v=2' rel='stylesheet' />
+  <script src='/js/libs/modernizr-1.6.min.js'></script>
+</head>
+<body>
+  <header id='header'>
+      <hgroup>
+        <a href='/' id='logo'>timmy willison</a>
+        <h2><a target="_blank" href="http://thisismedium.com/">Web</a> developer, <a target="_blank" href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a target="_blank" href="http://css3please.com/">css3</a> fanatic</h2>
+        <nav class='start' id='nav'>
+          <ul>
+            <li>
+              <a href='/samples/password123/'>jQuery password123</a>
+            </li>
+            <li>
+              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+            </li>
+            <li>
+              <a href='/pres/operators/'>Rare Javascript Operators</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/timmywil'>@timmywil</a>
+            </li>
+            <li>
+              <a href='http://github.com/timmywil'>Github</a>
+            </li>
+          </ul>
+        </nav>
+      </hgroup>
+    </header>
+  <div id='container'>
+    <section id='blog'>
+      <article>
+        <header class='clearfix'>
+          <h1>A New jQuery.attr and the New jQuery.prop Method</h1>
+          <h5 class='date'>4/18/2011</h5>
+        </header>
+        <div class='content'>
+          <p>The rewrite of the internal method jQuery.attr and the addition of jQuery.prop will be released in the upcoming release of jQuery 1.6 (May 1). This comes with a solid <a target="_blank" href="http://jsperf.com/attr-vs-attrhooks">performance improvement</a>, a modularized implementation, and a cleaner way of dealing with attributes. However, this rewrite will confuse some people who have been using jQuery.fn.attr for cases for which it was not intended, but have always worked. It used to be a jumbled juxtaposition of concepts attempting to deal with two things in one method, which caused many bugs.</p>
+            <p>First, we'll start with the difference between content attributes and IDL(Interface Definition Language) attributes. Once this distinction is understood, you will understand when to use attr and when to use prop.</p>
+            <p>Let's take a look at some common use cases for jQuery.fn.attr</p>
+            <pre name="code" class="javascript">
+            $("div").attr("id", "timmy");  // OK
+            $("video").attr("autofocus", true);  // OK
+            $(window).attr... // NO
+            $(document).attr...  // NO
+            $("input").attr("value"); // DEPENDS
+            $("input:checkbox").attr("checked"); // DEPENDS
+            </pre>
+            <p>The reason it makes no sense to call attr on the document or the window is due to the fact that they cannot have content attributes.</p>
+            <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/timmywil/Caxw3/embedded/result%2Cjs"></iframe>
+            <p>They are objects that contain IDL attributes( let's call them properties ), so getting or setting a content attribute with attr on these objects will not work anymore. Here are some examples of content attributes:</p>
+            <pre name="code" class="javascript">
+            &lt;input id=&quot;timmy1&quot; class=&quot;timmy&quot; name=&quot;timmy1&quot;
+                onclick=&quot;javascript:void()&quot; type=&quot;radio&quot; value=&quot;one&quot; selected=&quot;selected&quot;&gt;
+            </pre>
+            <p>All of these content attributes have properties that they map to. For instance, if elem is the node above, setting id="timmy1" on that <code>&lt;input&gt;</code> will also set it's property: <code>elem.id</code>. Setting <code>class="timmy"</code> will set <code>elem.className</code>. However, not all attributes work this way and the annoying inconsistencies between browsers are mainly caused by the differences in the way they are mapped onto node objects. For instance, when retrieving any content attribute from a form in IE6 or IE7, multiple node objects are returned instead of a string or some commonly returned value and therefore require a special call. This is because form.action can not only map to the action attribute of that form, but it can also map to some input within the form that has a name="action" if it exists (even though you should NEVER do that). The main job attr performs is get and set the correct attributes consistently across browsers.</p>
+            <p>Now, one issue that will come up and will have to be answered often in the bug tracker is how come <code>.attr("value")</code> or <code>.attr("checked")</code> or <code>.attr("selected")</code>don't work anymore? Well, actually they now work how they always should have worked. You see, in the <a href="http://www.w3.org/TR/html4/interact/forms.html#adef-value-INPUT" target="_blank">official specification</a> for these attributes, these attributes do not map to the properties that have the same name.  The value attribute does not map to the value property and the checked attribute does not map to the checked property, even though that's what attr gave you in the past. These attributes should only be used to set their <i>initial</i> values, or <i>default</i> versions of these properties such as <code>.defaultValue</code>. So, in the above code where I said "depends", I say this to make it clear that retrieving these attributes will not give you the element's <b>current</b> value. That is why it has always been recommended to use <code>.is(":checked")</code> when checking the checked property or <code>.val()</code> when retrieving values.</p>
+            <h3>
+              <i>jQuery.fn.prop</i>
+            </h3>
+            <p>If you find that attr is broken in your app, try switching it to this method.  This can be used to set properties on the window, document, plain objects, arrays, and all sorts of things.  It's really just a method for dot notation that has some fixes for cross-browser consistency. Normally, attr will still be the method of choice and you should keep in mind that attr is the preferred method for getting and setting content attributes.</p>
+            <h3>
+              <i>Boolean Attributes</i>
+            </h3>
+            <p>Finally, allow me to say a word about boolean attributes such as checked, selected, disabled, readOnly, and many html5 attributes that go on video or audio tags. Anyone who wants to set these attributes with javascript should know that the mere presence of these attributes on the DOM will be treated as if set to true. This means that even when you see <code>checked="false"</code> or <code>autofocus="false"</code>, these attributes can still be true in certain browsers. We account for some of the most common boolean attributes being set to false in jQuery, but to safely ensure you are setting all of your boolean attributes to false, <a href="http://api.jquery.com/removeAttr">remove them</a>.</p>
+        </div>
+      </article>
+    </section>
+    <section id='sidebar'>
+        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+        </a>
+      </section>
+    <footer id='footer'>
+      <p>
+        copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
+      </p>
+    </footer>
+  </div>
+  <!-- end of container -->
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      !window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.6.1.min.js"%3E%3C/script%3E'));
+    //]]>
+  </script>
+  <script src='/js/plugins.js' type='text/javascript'></script>
+  <script src='/js/script.js' type='text/javascript'></script>
+  
+  <!--[if lt IE 7 ]>
+    <script src="/js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <!-- asynchronous google analytics -->
+  <script type='text/javascript'>
+    //<![CDATA[
+      var _gaq = [['_setAccount', 'UA-15918109-1'], ['_trackPageview']];
+      (function(d, t) {
+       var g = d.createElement(t),
+      		 s = d.getElementsByTagName(t)[0];
+       g.async = true;
+       g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g, s);
+      })(document, 'script');
+    //]]>
+  </script>
+  
+</body>
+</html>

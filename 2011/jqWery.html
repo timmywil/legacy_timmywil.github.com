@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8' />
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+  <title>timmy willison</title>
+  <meta content="timmy willison's personal website and blog" name='description' />
+  <meta content='timmy willison personal website blog jquery tim jQuery core portfolio javascript html css html5 css3' name='keywords' />
+  <meta content='timmy willison' name='author' />
+  <!--[if IE]>
+    <meta content='no' http-equiv='imagetoolbar' />
+  <![endif]-->
+  <link href='/favicon.ico' rel='shortcut icon' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <link href='/css/style.css?v=2' rel='stylesheet' />
+  <script src='/js/libs/modernizr-1.6.min.js'></script>
+</head>
+<body>
+  <header id='header'>
+      <hgroup>
+        <a href='/' id='logo'>timmy willison</a>
+        <h2><a target="_blank" href="http://thisismedium.com/">Web</a> developer, <a target="_blank" href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a target="_blank" href="http://css3please.com/">css3</a> fanatic</h2>
+        <nav class='start' id='nav'>
+          <ul>
+            <li>
+              <a href='/samples/password123/'>jQuery password123</a>
+            </li>
+            <li>
+              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+            </li>
+            <li>
+              <a href='/pres/operators/'>Rare Javascript Operators</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/timmywil'>@timmywil</a>
+            </li>
+            <li>
+              <a href='http://github.com/timmywil'>Github</a>
+            </li>
+          </ul>
+        </nav>
+      </hgroup>
+    </header>
+  <div id='container'>
+    <section id='blog'>
+      <article>
+        <header class='clearfix'>
+          <h1>jqWery</h1>
+          <h5 class='date'>10/09/2011</h5>
+        </header>
+        <div class='content'>
+          <p>I have prodigious, monstrous respect for selector engines. During the past few weeks, it was an absolute blast digging into <a href="http://sizzlejs.com/">Sizzle</a> and <a href="https://github.com/ded/qwery/">qwery</a>. I underwent an experiment to plug qwery into jQuery and see how far I could get in passing the 430 selector tests that jQuery currently has in its test suite. I have several discoveries and conclusions. In no particular order:</p>
+            
+            <ul>
+            <li>qwery is not a viable selector engine for jQuery (wait, does that mean we're done? no!)</li>
+            <li>Sizzle could be a lot faster and I plan on doing a minor overhaul of Sizzle and taking advantage of a few of the performance gems in qwery.</li>
+            <li>qwery could be even faster and could learn a few things from Sizzle.</li>
+            <li>Sizzle is a freaking beast.</li>
+            </ul>
+            
+            
+            <hr />
+            
+            <h3>Why won't qwery work?</h3>
+            
+            <p>You might be asking why qwery won't work in jQuery. I was excited to see if it would work, but it is really not realistic.</p>
+            
+            <ol>
+            <li>The chunker cannot handle multiple pseudos or attribute selectors. Supporting this would require a complete rewrite of the engine. qwery tries to split up a selection all at once and passes the parts to the interpret function, which is great but makes it impossible to support multiple pseudos or attrs. This is also explained on qwery's <a href="http://dustindiaz.com/qwery">homepage</a>.</li>
+            <li>child selectors require a more complex filter and probably a prefilter in order to do things like :nth-child(2n+1) or :nth-child(-n+6), which qwery cannot do</li>
+            <li>qwery would need very similar code to that which Sizzle uses to sort nodes based on document order when selectors contain commas. Currently the selections are simply concat'd.  This makes for quicker selections, but would cause a <em>lot</em> of problems in jQuery (e.g. manipulating the DOM).</li>
+            <li>Positional pseudo selectors like :eq or :first require different arguments than a normal pseudo and cannot be done until after the full selection is complete (additionally, as stated before, qwery can only handle one pseudo in a selection)</li>
+            <li>Adding support for :not is more involved than it sounds. qwery does not currently support it.</li>
+            <li>qwery required a significant amount of restructuring to work with jQuery(although that wasn't terrible) as well as a matchesSelector function to pass at least 50% of the jQuery tests. Until an <a href="https://github.com/ded/qwery/compare/5c51e87303...3c9b387c82">addition that was landed today</a>, there was no way for qwery to do a filter.  You can check out how I expounded on that on <a href="https://github.com/timmywil/qwery/commit/16c98ff0635fcb0205aac917fa575f27c99647ec#L1R309">my branch</a> in order to make it work.</li>
+            <li>Sizzle has the advantage of being live-tested about a million times more and can handle a vast number of edge cases without the hard struggle of reorganization. Just as an example, qwery cannot handle any selector that fails in querySelectorAll, even if it fails due to a browser's faulty implementation of querySelectorAll (of which there are quite a few cases). qwery does have a test for css3support, but that is only one of several use cases where querySelectorAll may fail (and misses out on using querySelectorAll in browsers that support it for less complex selectors). Another example is that older versions of Safari cannot handle uppercase values in its querySelectorAll. It will fail without throwing an exception so querySelectorAll should not be used at all in those versions of Safari.</li>
+            <li><strong>main point</strong>: qwery would undoubtedly have to look a lot more like Sizzle</li>
+            </ol>
+            
+            
+            <blockquote><p>Most of the above is intentionally outside of the scope of qwery; these are just a few of the reasons why qwery would not be feasible in jQuery.</p></blockquote>
+            
+            <hr />
+            
+            <h3>Future Sizzle enhancements</h3>
+            
+            <ol>
+            <li>Currently, Sizzle rewrites it's main function based on the presence of querySelectorAll. This duplicates code and inconsistently optimizes for tags, ids, and classes in one, but not the other.  We can fix this by doing something similar to qwery.  Always optimize for tag, id, and possibly body, then call a select function that is querySelectorAll-dependent.  This will speed up Sizzle and clean up some duplicate code in not only Sizzle, but also in jQuery's init function.</li>
+            <li>Sizzle has an internal object called <code>Expr</code> with a ton of stuff on it. We should clean up internal references in order to.skip.the.vast.number.of.property.accesses.  A minor optimization, but it should speed things up a bit.</li>
+            <li>When creating <a href="https://github.com/timmywil/minimal">minimal</a>, I learned that it is not worth it to have a <code>makeArray</code> function that attempts to use <code>Array.prototype.slice</code> on nodes then provides a fallback.  The simple <a href="https://github.com/timmywil/qwery/blob/jquery/src/qwery.js#L106">array function</a> is actually faster in all browsers.</li>
+            <li>Other code reductions and performance enhancements thanks to ideas from qwery's interpreter, caching system, and regex creation.</li>
+            </ol>
+            
+            
+            <hr />
+            
+            <h3>Some suggestions for qwery</h3>
+            
+            <ol>
+            <li>There is no need to have the cache Object with a getter and setter on a prototype. Save the function calls and simply use <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L243">plain objects for your caches</a>.</li>
+            <li>Don't use an attrCache. qwery will get <a href="http://jsperf.com/sizzle-attr-vs-qwery-attr">better performance</a> with a <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L153">ternary</a> even when the regex has been cached. There are many things faster than a regex test so keep in mind the equivalent possibilities.</li>
+            <li>Similar to attrCache, <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L190">string concatenation + indexOf</a> for testing classes is faster than regex testing even when cached.</li>
+            <li>Consider catching the DOM exceptions on querySelectorAll(which are never descriptive), attempting the selection, then giving the user an idea of what went wrong. See the <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L470">select changes</a> and <a href="https://github.com/timmywil/qwery/blob/16c98ff0635fcb0205aac917fa575f27c99647ec/src/qwery.js#L202">an example of using a qwery.error</a>.  You'll find this will not only give your user an indication of what funny selection was passed, but actually fix many selector bugs across browsers for free (no need for the css3support test anymore either). <span class="smile">;)</span></li>
+            </ol>
+        </div>
+      </article>
+    </section>
+    <section id='sidebar'>
+        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+        </a>
+      </section>
+    <footer id='footer'>
+      <p>
+        copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
+      </p>
+    </footer>
+  </div>
+  <!-- end of container -->
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      !window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.6.1.min.js"%3E%3C/script%3E'));
+    //]]>
+  </script>
+  <script src='/js/plugins.js' type='text/javascript'></script>
+  <script src='/js/script.js' type='text/javascript'></script>
+  
+  <!--[if lt IE 7 ]>
+    <script src="/js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <!-- asynchronous google analytics -->
+  <script type='text/javascript'>
+    //<![CDATA[
+      var _gaq = [['_setAccount', 'UA-15918109-1'], ['_trackPageview']];
+      (function(d, t) {
+       var g = d.createElement(t),
+      		 s = d.getElementsByTagName(t)[0];
+       g.async = true;
+       g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g, s);
+      })(document, 'script');
+    //]]>
+  </script>
+  
+</body>
+</html>

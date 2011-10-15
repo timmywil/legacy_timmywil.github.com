@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8' />
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+  <title>timmy willison</title>
+  <meta content="timmy willison's personal website and blog" name='description' />
+  <meta content='timmy willison personal website blog jquery tim jQuery core portfolio javascript html css html5 css3' name='keywords' />
+  <meta content='timmy willison' name='author' />
+  <!--[if IE]>
+    <meta content='no' http-equiv='imagetoolbar' />
+  <![endif]-->
+  <link href='/favicon.ico' rel='shortcut icon' />
+  <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
+  <link href='/css/style.css?v=2' rel='stylesheet' />
+  <script src='/js/libs/modernizr-1.6.min.js'></script>
+</head>
+<body>
+  <header id='header'>
+      <hgroup>
+        <a href='/' id='logo'>timmy willison</a>
+        <h2><a target="_blank" href="http://thisismedium.com/">Web</a> developer, <a target="_blank" href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a target="_blank" href="http://css3please.com/">css3</a> fanatic</h2>
+        <nav class='start' id='nav'>
+          <ul>
+            <li>
+              <a href='/samples/password123/'>jQuery password123</a>
+            </li>
+            <li>
+              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+            </li>
+            <li>
+              <a href='/pres/operators/'>Rare Javascript Operators</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/timmywil'>@timmywil</a>
+            </li>
+            <li>
+              <a href='http://github.com/timmywil'>Github</a>
+            </li>
+          </ul>
+        </nav>
+      </hgroup>
+    </header>
+  <div id='container'>
+    <section id='blog'>
+      <article>
+        <header class='clearfix'>
+          <h1>The Typical Behavior of the <code>this</code> Keyword</h1>
+          <h5 class='date'>3/5/2011</h5>
+        </header>
+        <div class='content'>
+          <p>Brendan Eich, the father of Javascript, recently released a <a href="http://www.aminutewithbrendan.com/pages/20110303" target="_blank">podcast on the <code>this</code> keyword</a>. He discusses strict mode and perhaps a more proper definition of <code>this</code>.</p>
+            <p>It can sometimes be difficult to remember what the <code>this</code> keyword is. For instance, as we all know, jQuery is an object(well actually a function but we'll get to that). Let's look at <code>this</code> within jQuery's event code. You do not need to understand the internals of jQuery events here.</p>
+            <pre name="code" class="javascript">
+            jQuery.Event = function( src ) {
+              // Allow instantiation without the 'new' keyword
+              if ( !this.preventDefault ) {
+                return new jQuery.Event( src );
+              }
+              ...
+            };
+            </pre>
+            <p>An important thing to understand when trying to understand <code>this</code> is the Javascript prototype. How is it that jQuery.Event can call itself and not go into an infinite loop?</p>
+            <p>The first time you call <code>jQuery.Event( src )</code>, what you will get is an instantiation of jQuery.Event because <code>this</code> the first time is simply jQuery the function, not the instantiated object that the jQuery function returns that we are all used to dealing with.</p>
+            <p>Given that, this.preventDefault is undefined. So it calls jQuery.Event() again, but this time with <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/new">the new operator</a>, automatically instantiating an event. Therefore, in this call to jQuery.Event, <code>this</code> is now jQuery.Event with an attached prototype and all instance variables, <b>and that includes jQuery.Event.prototype.preventDefault</b>, which should now be simply referred to as this.preventDefault. Since this.preventDefault is no longer undefined, the code moves on.</p>
+            <div class='note'>
+              See the docs for <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/prototype">object prototypes in Javascript</a> and <a href="https://developer.mozilla.org/en/JavaScript/Strict_mode">strict mode</a>.
+            </div>
+            <p>Now, this is a clever way to ensure jQuery.Event is always instantiated, but maybe you can see how coders can sometimes get confused by what <code>this</code> is.</p>
+            <p>The question Brendan asks, is what about functions that you write that are not actually methods on the window, but still have the this keyword equal to the global object. This seems inconsistent. This seems like trouble. Should it always default to window?</p>
+            <div class='note'>
+              Press play!
+            </div>
+            <iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/timmywil/efa99/embedded/"></iframe>
+            <p>The "strict mode" usage of <code>this</code> goes something like <a target="_blank" href="http://instantrimshot.com/">this</a>.</p>
+            <iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/timmywil/efa99/1/embedded/"></iframe>
+            <p>Strict mode makes it undefined. In advanced applications using the <code>this</code> keyword, undefined might be more accurate. Keep in mind we probably can't use this yet since strict mode works only in the most modern browsers that support <a href="https://developer.mozilla.org/en/JavaScript/New_in_JavaScript/1.8.5">Javascript 1.8.5</a>. Have fun!</p>
+        </div>
+      </article>
+    </section>
+    <section id='sidebar'>
+        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+        </a>
+      </section>
+    <footer id='footer'>
+      <p>
+        copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
+      </p>
+    </footer>
+  </div>
+  <!-- end of container -->
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      !window.jQuery && document.write(unescape('%3Cscript src="/js/libs/jquery-1.6.1.min.js"%3E%3C/script%3E'));
+    //]]>
+  </script>
+  <script src='/js/plugins.js' type='text/javascript'></script>
+  <script src='/js/script.js' type='text/javascript'></script>
+  
+  <!--[if lt IE 7 ]>
+    <script src="/js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+  <!-- asynchronous google analytics -->
+  <script type='text/javascript'>
+    //<![CDATA[
+      var _gaq = [['_setAccount', 'UA-15918109-1'], ['_trackPageview']];
+      (function(d, t) {
+       var g = d.createElement(t),
+      		 s = d.getElementsByTagName(t)[0];
+       g.async = true;
+       g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g, s);
+      })(document, 'script');
+    //]]>
+  </script>
+  
+</body>
+</html>
