@@ -36,7 +36,7 @@
 		load: function() {
 			var self = this;
 
-			// Delay canvas rendering
+			// Delay canvas rendering until after nav animation
 			if ( $('#html5-logo').length ) {
 				setTimeout(function() {
 
@@ -45,12 +45,15 @@
 					}
 
 					// Click to show the canvas
-					var $home = $('#home').css({ "position": "relative", "visibility": "visible", "display": "none" });
-					$('#html5').click(function() {
-						$home.stop(true, true).slideToggle();
-						return false;
-					}).attr('title', 'easter egg?');
+					var $home = $('#home').css({ "position": "relative", "visibility": "visible", "display": "none" }),
+						$html5 = $('#html5').click(function() {
+							$home.stop(true, true).slideToggle();
+							return false;
+						}).attr('title', 'easter egg');
 
+					if ( startCanvasOpen ) {
+						$html5.click();
+					}
 				}, 3000);
 			}
 		},
