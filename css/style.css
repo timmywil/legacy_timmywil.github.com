@@ -624,6 +624,26 @@ input:invalid,textarea:invalid,input.invalid,textarea.invalid {
     width: 200px;
 }
 
+/* sidebar rss */
+#rss {
+    display: block;
+    margin: 30px 0 0; text-indent: -999em;
+    width: 50px; height: 50px;
+    background-color: #fa821e;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fa821e), to(#cc5500)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #fa821e, #cc5500); /* Chrome 10+, Saf5.1+ */
+    background-image:     -moz-linear-gradient(top, #fa821e, #cc5500); /* FF3.6 */
+    background-image:      -ms-linear-gradient(top, #fa821e, #cc5500); /* IE10 */
+    background-image:       -o-linear-gradient(top, #fa821e, #cc5500); /* Opera 11.10+ */
+    background-image:          linear-gradient(top, #fa821e, #cc5500);
+              filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fa821e', EndColorStr='#cc5500');
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+     -moz-box-shadow: inset 0px 3px 10px rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: inset 0px 3px 10px rgba(255, 255, 255, 0.7);
+          box-shadow: inset 0px 3px 10px rgba(255, 255, 255, 0.7);
+}
 
 /* Footer
 ----------------------------------*/

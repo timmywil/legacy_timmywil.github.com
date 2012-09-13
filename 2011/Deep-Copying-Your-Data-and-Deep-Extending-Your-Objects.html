@@ -21,33 +21,33 @@
 </head>
 <body>
   <header id='header'>
-      <hgroup>
-        <a href='/' id='logo'>timmy willison</a>
-        <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
-        <nav class='start' id='nav'>
-          <ul>
-            <li>
-              <a href='/samples/password123/'>jQuery password123</a>
-            </li>
-            <li>
-              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
-            </li>
-            <li>
-              <a href='/pres/operators/'>Rare Javascript Operators</a>
-            </li>
-            <li>
-              <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
-            </li>
-            <li>
-              <a href='http://twitter.com/timmywil'>@timmywil</a>
-            </li>
-            <li>
-              <a href='http://github.com/timmywil'>Github</a>
-            </li>
-          </ul>
-        </nav>
-      </hgroup>
-    </header>
+  <hgroup>
+    <a href='/' id='logo'>timmy willison</a>
+    <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
+    <nav class='start' id='nav'>
+      <ul>
+        <li>
+          <a href='/samples/password123/'>jQuery password123</a>
+        </li>
+        <li>
+          <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+        </li>
+        <li>
+          <a href='/pres/operators/'>Rare Javascript Operators</a>
+        </li>
+        <li>
+          <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
+        </li>
+        <li>
+          <a href='http://twitter.com/timmywil'>@timmywil</a>
+        </li>
+        <li>
+          <a href='http://github.com/timmywil'>Github</a>
+        </li>
+      </ul>
+    </nav>
+  </hgroup>
+</header>
   <div id='container'>
     <section id='blog'>
       <article>
@@ -57,27 +57,30 @@
         </header>
         <div class='content'>
           <p>The <a href="http://api.jquery.com/clone">docs for jQuery.clone</a> were recently updated to reflect the way jQuery clones data. I thought this subject could use even more clarification. By default, jQuery copies only the top level of an element's data. That means if you have an array or object within the data object, that will still be a direct reference and when you change one, the other changes with it.</p>
-            <p>For a demonstration, see <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/4/">http://jsfiddle.net/timmywil/uvpPw/4/</a>. Notice that the alerts will be the same.</p>
-            <p>If we don't want that, we can fix this ourselves by creating a new array or object with jQuery.extend. Do not be confused. The words "deep copy" below refer to deep copying data, not doing a deep extend (which in a way is the opposite); that we will discuss afterwards.</p>
-            <pre name="code" class="javascript">
-            var $elem = $('#elem').data( "arr": [ 1 ] ), // Original element with attached data
-                $clone = $elem.clone( true )
-                  .data( "arr", $.extend( [], $elem.data("arr") ) ); // Deep copy to prevent data sharing
-            </pre>
-            <div class='note'>Now see this working: <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/3/">http://jsfiddle.net/timmywil/uvpPw/3/</a>. The original button's data is kept intact.</div>
-            <h3>
-              <i>Deep Extends</i>
-            </h3>
-            <p>I didn't quite understand what it meant to do a deep extend so I dug through the source and <a target="_blank" href="http://jsfiddle.net/timmywil/dfQS6/">played around a bit</a>. With a deep copy, we want to avoid passing around references so that our original data is not linked with cloned data. With a deep extend, we <i>want</i> our new object to contain <b>direct references</b> to the objects contained in the originals.</p>
-            <p>In the demo, you'll notice that only after the deep extend does "littleObj" get updated whenever our new extended object is updated. This is very useful for updating data that may be outside the scope of a particular function you are working in, linking data for events, or writing your very own data link plugin. <span class="smile">=)</span></p>
+<p>For a demonstration, see <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/4/">http://jsfiddle.net/timmywil/uvpPw/4/</a>. Notice that the alerts will be the same.</p>
+<p>If we don't want that, we can fix this ourselves by creating a new array or object with jQuery.extend. Do not be confused. The words "deep copy" below refer to deep copying data, not doing a deep extend (which in a way is the opposite); that we will discuss afterwards.</p>
+<pre name="code" class="javascript">
+var $elem = $('#elem').data( "arr": [ 1 ] ), // Original element with attached data
+    $clone = $elem.clone( true )
+      .data( "arr", $.extend( [], $elem.data("arr") ) ); // Deep copy to prevent data sharing
+</pre>
+<div class='note'>Now see this working: <a target="_blank" href="http://jsfiddle.net/timmywil/uvpPw/3/">http://jsfiddle.net/timmywil/uvpPw/3/</a>. The original button's data is kept intact.</div>
+<h3>
+  <i>Deep Extends</i>
+</h3>
+<p>I didn't quite understand what it meant to do a deep extend so I dug through the source and <a target="_blank" href="http://jsfiddle.net/timmywil/dfQS6/">played around a bit</a>. With a deep copy, we want to avoid passing around references so that our original data is not linked with cloned data. With a deep extend, we <i>want</i> our new object to contain <b>direct references</b> to the objects contained in the originals.</p>
+<p>In the demo, you'll notice that only after the deep extend does "littleObj" get updated whenever our new extended object is updated. This is very useful for updating data that may be outside the scope of a particular function you are working in, linking data for events, or writing your very own data link plugin. <span class="smile">=)</span></p>
         </div>
       </article>
     </section>
     <section id='sidebar'>
-        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
-          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
-        </a>
-      </section>
+      <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+        <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+      </a>
+      <a href='http://open.dapper.net/transform.php?dappName=TimmyWillisonsBlog&amp;transformer=RSS&amp;extraArg_title=Timmy_Willisons_Blog&amp;extraArg_pubDate=Blog_post_dates&amp;applyToUrl=http%3A%2F%2Ftimmywillison.com%2F' id='rss'>
+        RSS
+      </a>
+    </section>
     <footer id='footer'>
       <p>
         copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>

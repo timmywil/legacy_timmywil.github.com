@@ -44,280 +44,280 @@
     <div id='presentation-counter'></div>
     <div class='slides'>
       <!-- Title -->
-      <div class='slide' id='landing'>
-        <section class='middle landing'>
-          <h1>Rare Javascript Operators</h1>
-          <h4>by Timmy Willison</h4>
-        </section>
-      </div>
-      <!-- All operators -->
-      <div class='slide' id='all-operators'>
-        <header>
-          <h1>All the operators!</h1>
-        </header>
-        <section class='middle smallerCode'>
-          <h3>Arithmetic, Assignment, Bitwise, Comparison, Logical, & String</h3>
-          <pre class='brush: js; toolbar: false'>(+, -, *, /, %, ++, --, unary -, unary +)&#x000A;(=, *=, /=, %=, +=, -=, <<=, >>=, >>>=, &=, ^=, |=)&#x000A;(&, |, ^, ~, <<, >>, >>>)&#x000A;(==, !=, ===, !==, >, >=, <, <=)&#x000A;(&&, ||, !)&#x000A;(+ and +=)</pre>
-          <a href='https://developer.mozilla.org/en/JavaScript/Reference/Operators' target='_blank'>Operators docs</a>
-        </section>
-      </div>
-      <!-- What?? -->
-      <div class='slide' id='what'>
-        <section class='middle'>
-          <h1>I can haz lots!</h1>
-          <br />
-          <img alt='Smooth Operator' src='img/clinton.jpg' />
-          <p>Smooth Operator</p>
-        </section>
-      </div>
-      <!-- Operator Precendence -->
-      <div class='slide' id='precedence'>
-        <header>
-          <h1>Operator precedence</h1>
-          <p>Javascript has 17 levels of precedence</p>
-        </header>
-        <section>
-          <ol>
-            <li>Member(., []), new</li>
-            <li>function call()</li>
-            <li>++ and --</li>
-            <li>!, ~, unary +, unary - (e.g. -1), typeof, void, delete</li>
-            <li>*, /, %</li>
-            <li>+ and -</li>
-            <li>bitwise shifting (<<, >>, >>>)</li>
-            <li>relational(<, <=, >, >=), in, instanceof</li>
-            <li>equality(==, !=, ===, !==)</li>
-            <li>bitwise-and (&)</li>
-            <li>bitwise-xor (^)</li>
-            <li>bitwise-or (|)</li>
-            <li>logical-and (&&)</li>
-            <li>logical-or (||)</li>
-            <li>conditional (?:)</li>
-            <li>all assignment operators</li>
-            <li>comma (,)</li>
-          </ol>
-        </section>
-      </div>
-      <!-- Bitwise operators -->
-      <div class='slide' id='bitwise-operators'>
-        <header>
-          <h1>Bitwise Operators</h1>
-        </header>
-        <section>
-          <p>Are they useful in the real world?</p>
-          <iframe src='http://jsfiddle.net/timmywil/ApwAa/embedded/' style='width: 100%; height: 300px'></iframe>
-        </section>
-      </div>
-      <!-- Tilde operator -->
-      <div class='slide' id='tilde'>
-        <header>
-          <h1>The ~ operator</h1>
-        </header>
-        <section>
-          <p>-( n + 1 )</p>
-          <iframe src='http://jsfiddle.net/timmywil/EAfYR/embedded/' style='width: 100%; height: 300px'></iframe>
-        </section>
-      </div>
-      <!-- Tilde is useful -->
-      <div class='slide' id='tilde-useful'>
-        <header>
-          <h1>Tilde is useful!</h1>
-        </header>
-        <section>
-          <p>We can use for any functions that return -1</p>
-          <pre class='brush:js; toolbar: false'>var foo = "baz",&#x000A;    checkFoo = foo.indexOf("bar");&#x000A;// So instead of...&#x000A;if ( checkFoo !== -1 ) {&#x000A;&#x000A;}&#x000A;// We can do&#x000A;if ( ~checkFoo ) {&#x000A;&#x000A;}&#x000A;&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Tilde in use -->
-      <div class='slide' id='tilde-usage'>
-        <header>
-          <h1>~pres.indexOf("example")</h1>
-        </header>
-        <section>
-          <iframe src='http://jsfiddle.net/timmywil/sGHzs/embedded/' style='width: 100%; height: 300px'></iframe>
-          <br />
-          <br />
-          <br />
-          <p class='right'>Next one will floor you!</p>
-        </section>
-      </div>
-      <!-- Zero-fill shift right -->
-      <div class='slide' id='zero-fill-shift-right'>
-        <header>
-          <h1>0-fill shift right(<code>&gt;&gt;&gt;</code>)</h1>
-        </header>
-        <section>
-          <p>Here's another useful bitwise operator.</p>
-          <p>A quick Math.floor for positive values (make sure it's positive tho)!</p>
-          <iframe src='http://jsfiddle.net/timmywil/ZcCDz/embedded/' style='width: 100%; height: 300px'></iframe>
-        </section>
-      </div>
-      <div class='slide' id='shift-right-example'>
-        <header>
-          <h1>Example.notAwesome >>> 0</h1>
-        </header>
-        <section class='smallerCode'>
-          <h4>Here's an <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/foreach">implementation from MDC</a> of forEach</h4>
-          <pre class='brush:js; toolbar: false'>Array.prototype.forEach = function( fun, thisp ) {&#x000A;  var t, len;&#x000A;  if ( this === void 0 ||&#x000A;      this === null ||&#x000A;      typeof fun !== "function" ) {&#x000A;    throw new TypeError();&#x000A;  }&#x000A;&#x000A;  t = Object(this);&#x000A;  len = t.length >>> 0;&#x000A;  for ( var i = 0; i < len; i++ ) {&#x000A;    if ( i in t ) {&#x000A;      fun.call(thisp, t[i], i, t);&#x000A;    }&#x000A;  }&#x000A;};&#x000A;&#x000A;&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Special operators -->
-      <div class='slide' id='special-operators'>
-        <header>
-          <h1>Special Operators</h1>
-        </header>
-        <section class='center'>
-          <ul class='none'>
-            <li>
-              <h3>Conditional Operator (Ternary)</h3>
-              <pre class='brush: js; toolbar: false'>(condition ? ifTrue : ifFalse)</pre>
-            </li>
-            <li>
-              <h3>Comma Operator</h3>
-              <pre class='brush: js; toolbar: false'>(,)</pre>
-            </li>
-            <li>
-              <h3>Operators that are keywords</h3>
-              <pre class='brush: js; toolbar: false'>(function, delete, get, in, instanceof, let, new, set, this, typeof, void, yield)</pre>
-            </li>
-          </ul>
-          <br />
-          <p class='small'>Note: Technically, get and set are not really called anything in the <a href="http://es5.github.com/#x11.1.5">spec</a>, but are part of Property Descriptor defintions in Object Initialiser/PropertyAssignment.  Mozilla Developer Network <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators">calls them operators</a>.  Either way, they're fun.</p>
-        </section>
-      </div>
-      <!-- Get -->
-      <div class='slide' id='get'>
-        <header>
-          <h1><code>get</code></h1>
-        </header>
-        <section>
-          <p>Binds an object property to a function that will be called when that property is looked up.</p>
-          <pre class='brush:js;toolbar:false'>var o = {&#x000A;  get latest () {&#x000A;    return this.log.length > 0 ?&#x000A;      this.log[ this.log.length - 1 ] :&#x000A;      null;&#x000A;  },&#x000A;  log: []&#x000A;};&#x000A;o.log[0] = "wowowow!";&#x000A;o.latest === "wowowow!";&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Set -->
-      <div class='slide' id='set'>
-        <header>
-          <h1><code>set</code></h1>
-        </header>
-        <section class='smallerCode'>
-          <p>Binds an object property to a function to be called when there is an attempt to set that property</p>
-          <pre class='brush:js;toolbar:false'>var o = {&#x000A;  set current ( str ) {&#x000A;    return this.log[this.log.length] = str;&#x000A;  },&#x000A;  log: []&#x000A;};&#x000A;&#x000A;o.current = "foo";&#x000A;o.log[0] === "foo";&#x000A;delete o.current;</pre>
-          <p>The <a target="_blank" href="http://jsperf.com/set-vs-function-call/2/">downside</a></p>
-        </section>
-      </div>
-      <!-- Comma Operator -->
-      <div class='slide' id='comma'>
-        <section class='smallerCode middle'>
-          <h2>You've probably used comma before</h2>
-          <pre class='brush:js;toolbar:false'>for (var i = 0, j = 9; i <= 9; i++, j--) {&#x000A;  document.writeln("a["+i+"]["+j+"] = " + a[i][j]);&#x000A;}</pre>
-          <h3>That is different than (not an operator here):</h3>
-          <pre class='brush:js;toolbar:false'>var i, l, foo, bar, baz;</pre>
-          <blockquote>Use it when you want multiple expressions in a location that requires a single expression.</blockquote>
-        </section>
-      </div>
-      <!-- Comma Awesome -->
-      <div class='slide' id='comma-awesome'>
-        <header>
-          <h2>Wicked awesome usage (<a href="http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/">James Padolsey</a>)</h2>
-        </header>
-        <section class='smallerCode'>
-          <p>Detect IE in JS using conditional comments (No block in that while?!?)</p>
-          <pre class='brush:js;toolbar:false'>var ie = (function(){&#x000A;    var undef,&#x000A;        v = 3,&#x000A;        div = document.createElement('div'),&#x000A;        all = div.getElementsByTagName('i');&#x000A;&#x000A;    while (&#x000A;        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',&#x000A;        all[0]&#x000A;    );&#x000A;&#x000A;    return v > 4 ? v : undef;&#x000A;}());&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Hot debate ( equality ) -->
-      <div class='slide' id='equality'>
-        <header>
-          <h1>Hot debate! <code>==</code> vs <code>===</code></h1>
-        </header>
-        <section>
-          <p>You know the difference. <code>==</code> attempts to coerce the values before comparison. So which should you use?</p>
-          <pre class='brush:js; toolbar:false'>0 === 0 // true&#x000A;0 == '0' // true&#x000A;0 === '0' // false&#x000A;0 == false // true&#x000A;0 == '' // true&#x000A;null == undefined // true&#x000A;null === undefined // false&#x000A;&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Benchmark without coercion -->
-      <div class='slide' id='without-coercion'>
-        <section class='middle'>
-          <img alt='Equals benchmark without coercion' src='img/strict_equal_vs_equal.001.jpg' style='width:100%' />
-        </section>
-      </div>
-      <!-- Benchmark without coercion -->
-      <div class='slide' id='with-coercion'>
-        <section class='middle'>
-          <img alt='Equals benchmark with coercion' src='img/strict_equal_vs_equal.002.jpg' style='width:100%' />
-        </section>
-      </div>
-      <!-- Strict equals -->
-      <div class='slide' id='strict-equals'>
-        <header>
-          <h2>Short answer: strict equals (===) has better performance. <a href='http://jsperf.com/equal-vs-strict-equal' target='_blank'>JSPerf stats</a></h2>
-        </header>
-        <section class='lower'>
-          <ul>
-            <li>Chrome's V8 engine has significantly lower performance with double equal when type coercion does occur( overall performance is unmatched in V8 ).</li>
-            <li>Safari's JavascriptCore is odd. <code>==</code> wins for no type coercion and <code>===</code> wins with type coercion.</li>
-            <li>IE6-8 has consistently better performance with <code>===</code> whether type coercion is done or not.</li>
-            <li>Opera also has consistently better performance with <code>===</code>, but type coercion significantly slows both.</li>
-            <li>Firefox 3.6's Spidermonkey had similar results to Chrome, but obviously with lower numbers.</li>
-            <li>The new Firefox 4 js engine (jägermonkey) optimizes for ==, so it does win in this browser.</li>
-            <li>Strict equal(===) compresses to 1 byte just like (==) with gzip compression, so the argument that it takes up more space is not valid in that case.</li>
-          </ul>
-        </section>
-      </div>
-      <!-- Use bang instead -->
-      <div class='slide' id='bang'>
-        <header>
-          <h1>Bang! (bam)</h1>
-          <p><code>==</code> is most often useful when doing comparison with null, also want to catch undefined.</p>
-        </header>
-        <section class='middle center'>
-          <img alt='Bambam' src='img/bambam.jpg' />
-          <h2>In most cases, it would also be useful for you to catch 0 and empty string...</h2>
-        </section>
-      </div>
-      <!-- Bang example -->
-      <div class='slide' id='bang-example'>
-        <header>
-          <h1>!!example</h1>
-        </header>
-        <section class='smallerCode'>
-          <pre class='brush:js; toolbar:false'>function foo( arg ) {&#x000A;  if ( arg != null ) {&#x000A;    // Argument is present, but may be empty string or 0&#x000A;  }&#x000A;}&#x000A;function foo( arg ) {&#x000A;  if ( !!arg ) {&#x000A;    // Argument is valid&#x000A;  }&#x000A;}&#x000A;// Can be even shorter&#x000A;function foo( arg ) {&#x000A;  if ( arg ) {&#x000A;    // 0, '', null, and undefined are "falsy"&#x000A;  }&#x000A;}&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Strict equal adequacy -->
-      <div class='slide' id='strict-adequacy'>
-        <header>
-          <h2>There are a few cases where <code>===</code> may not be adequate.</h2>
-        </header>
-        <section class='lower'>
-          <h3>String literal vs string object</h3>
-          <pre class='brush:js;toolbar:false'>"abc" == new String("abc") // true&#x000A;"abc" === new String("abc") // false</pre>
-          <p><code>==</code> will check the value, but they are not the same type.</p>
-          <pre class='brush:js; toolbar:false'>typeof "abc" // "string"&#x000A;typeof new String("abc") // "object"&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Paradoxical number -->
-      <div class='slide' id='NaN'>
-        <header>
-          <h2>Side note: The paradoxical number (NaN)</h2>
-        </header>
-        <section class='middle'>
-          <pre class='brush:js;toolbar:false'>NaN == NaN // false&#x000A;typeof NaN === "number" // true&#x000A;&#x000A;var a = NaN;&#x000A;a == NaN || a === NaN // false&#x000A;&#x000A;isNaN( a ) // true, use this!</pre>
-          <p>This is why we need isNaN()</p>
-        </section>
-      </div>
-      <!-- Thanks -->
-      <div class='slide' id='thanks'>
-        <section class='middle'>
-          <h1>Thanks</h1>
-          <ul class='none'>
-            <li><a href="http://twitter.com/#!/timmywil">@timmywil (Also in the #jquery irc)</a></li>
-            <li><a href="http://github.com/timmywil">Github</a></li>
-            <li><a href="http://timmywillison.com">timmywillison.com</a></li>
-          </ul>
-        </section>
-      </div>
+<div class='slide' id='landing'>
+  <section class='middle landing'>
+    <h1>Rare Javascript Operators</h1>
+    <h4>by Timmy Willison</h4>
+  </section>
+</div>
+<!-- All operators -->
+<div class='slide' id='all-operators'>
+  <header>
+    <h1>All the operators!</h1>
+  </header>
+  <section class='middle smallerCode'>
+    <h3>Arithmetic, Assignment, Bitwise, Comparison, Logical, & String</h3>
+    <pre class='brush: js; toolbar: false'>(+, -, *, /, %, ++, --, unary -, unary +)&#x000A;(=, *=, /=, %=, +=, -=, <<=, >>=, >>>=, &=, ^=, |=)&#x000A;(&, |, ^, ~, <<, >>, >>>)&#x000A;(==, !=, ===, !==, >, >=, <, <=)&#x000A;(&&, ||, !)&#x000A;(+ and +=)</pre>
+    <a href='https://developer.mozilla.org/en/JavaScript/Reference/Operators' target='_blank'>Operators docs</a>
+  </section>
+</div>
+<!-- What?? -->
+<div class='slide' id='what'>
+  <section class='middle'>
+    <h1>I can haz lots!</h1>
+    <br />
+    <img alt='Smooth Operator' src='img/clinton.jpg' />
+    <p>Smooth Operator</p>
+  </section>
+</div>
+<!-- Operator Precendence -->
+<div class='slide' id='precedence'>
+  <header>
+    <h1>Operator precedence</h1>
+    <p>Javascript has 17 levels of precedence</p>
+  </header>
+  <section>
+    <ol>
+      <li>Member(., []), new</li>
+      <li>function call()</li>
+      <li>++ and --</li>
+      <li>!, ~, unary +, unary - (e.g. -1), typeof, void, delete</li>
+      <li>*, /, %</li>
+      <li>+ and -</li>
+      <li>bitwise shifting (<<, >>, >>>)</li>
+      <li>relational(<, <=, >, >=), in, instanceof</li>
+      <li>equality(==, !=, ===, !==)</li>
+      <li>bitwise-and (&)</li>
+      <li>bitwise-xor (^)</li>
+      <li>bitwise-or (|)</li>
+      <li>logical-and (&&)</li>
+      <li>logical-or (||)</li>
+      <li>conditional (?:)</li>
+      <li>all assignment operators</li>
+      <li>comma (,)</li>
+    </ol>
+  </section>
+</div>
+<!-- Bitwise operators -->
+<div class='slide' id='bitwise-operators'>
+  <header>
+    <h1>Bitwise Operators</h1>
+  </header>
+  <section>
+    <p>Are they useful in the real world?</p>
+    <iframe src='http://jsfiddle.net/timmywil/ApwAa/embedded/' style='width: 100%; height: 300px'></iframe>
+  </section>
+</div>
+<!-- Tilde operator -->
+<div class='slide' id='tilde'>
+  <header>
+    <h1>The ~ operator</h1>
+  </header>
+  <section>
+    <p>-( n + 1 )</p>
+    <iframe src='http://jsfiddle.net/timmywil/EAfYR/embedded/' style='width: 100%; height: 300px'></iframe>
+  </section>
+</div>
+<!-- Tilde is useful -->
+<div class='slide' id='tilde-useful'>
+  <header>
+    <h1>Tilde is useful!</h1>
+  </header>
+  <section>
+    <p>We can use for any functions that return -1</p>
+    <pre class='brush:js; toolbar: false'>var foo = "baz",&#x000A;    checkFoo = foo.indexOf("bar");&#x000A;// So instead of...&#x000A;if ( checkFoo !== -1 ) {&#x000A;&#x000A;}&#x000A;// We can do&#x000A;if ( ~checkFoo ) {&#x000A;&#x000A;}&#x000A;&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Tilde in use -->
+<div class='slide' id='tilde-usage'>
+  <header>
+    <h1>~pres.indexOf("example")</h1>
+  </header>
+  <section>
+    <iframe src='http://jsfiddle.net/timmywil/sGHzs/embedded/' style='width: 100%; height: 300px'></iframe>
+    <br />
+    <br />
+    <br />
+    <p class='right'>Next one will floor you!</p>
+  </section>
+</div>
+<!-- Zero-fill shift right -->
+<div class='slide' id='zero-fill-shift-right'>
+  <header>
+    <h1>0-fill shift right(<code>&gt;&gt;&gt;</code>)</h1>
+  </header>
+  <section>
+    <p>Here's another useful bitwise operator.</p>
+    <p>A quick Math.floor for positive values (make sure it's positive tho)!</p>
+    <iframe src='http://jsfiddle.net/timmywil/ZcCDz/embedded/' style='width: 100%; height: 300px'></iframe>
+  </section>
+</div>
+<div class='slide' id='shift-right-example'>
+  <header>
+    <h1>Example.notAwesome >>> 0</h1>
+  </header>
+  <section class='smallerCode'>
+    <h4>Here's an <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/foreach">implementation from MDC</a> of forEach</h4>
+    <pre class='brush:js; toolbar: false'>Array.prototype.forEach = function( fun, thisp ) {&#x000A;  var t, len;&#x000A;  if ( this === void 0 ||&#x000A;      this === null ||&#x000A;      typeof fun !== "function" ) {&#x000A;    throw new TypeError();&#x000A;  }&#x000A;&#x000A;  t = Object(this);&#x000A;  len = t.length >>> 0;&#x000A;  for ( var i = 0; i < len; i++ ) {&#x000A;    if ( i in t ) {&#x000A;      fun.call(thisp, t[i], i, t);&#x000A;    }&#x000A;  }&#x000A;};&#x000A;&#x000A;&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Special operators -->
+<div class='slide' id='special-operators'>
+  <header>
+    <h1>Special Operators</h1>
+  </header>
+  <section class='center'>
+    <ul class='none'>
+      <li>
+        <h3>Conditional Operator (Ternary)</h3>
+        <pre class='brush: js; toolbar: false'>(condition ? ifTrue : ifFalse)</pre>
+      </li>
+      <li>
+        <h3>Comma Operator</h3>
+        <pre class='brush: js; toolbar: false'>(,)</pre>
+      </li>
+      <li>
+        <h3>Operators that are keywords</h3>
+        <pre class='brush: js; toolbar: false'>(function, delete, get, in, instanceof, let, new, set, this, typeof, void, yield)</pre>
+      </li>
+    </ul>
+    <br />
+    <p class='small'>Note: Technically, get and set are not really called anything in the <a href="http://es5.github.com/#x11.1.5">spec</a>, but are part of Property Descriptor defintions in Object Initialiser/PropertyAssignment.  Mozilla Developer Network <a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators">calls them operators</a>.  Either way, they're fun.</p>
+  </section>
+</div>
+<!-- Get -->
+<div class='slide' id='get'>
+  <header>
+    <h1><code>get</code></h1>
+  </header>
+  <section>
+    <p>Binds an object property to a function that will be called when that property is looked up.</p>
+    <pre class='brush:js;toolbar:false'>var o = {&#x000A;  get latest () {&#x000A;    return this.log.length > 0 ?&#x000A;      this.log[ this.log.length - 1 ] :&#x000A;      null;&#x000A;  },&#x000A;  log: []&#x000A;};&#x000A;o.log[0] = "wowowow!";&#x000A;o.latest === "wowowow!";&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Set -->
+<div class='slide' id='set'>
+  <header>
+    <h1><code>set</code></h1>
+  </header>
+  <section class='smallerCode'>
+    <p>Binds an object property to a function to be called when there is an attempt to set that property</p>
+    <pre class='brush:js;toolbar:false'>var o = {&#x000A;  set current ( str ) {&#x000A;    return this.log[this.log.length] = str;&#x000A;  },&#x000A;  log: []&#x000A;};&#x000A;&#x000A;o.current = "foo";&#x000A;o.log[0] === "foo";&#x000A;delete o.current;</pre>
+    <p>The <a target="_blank" href="http://jsperf.com/set-vs-function-call/2/">downside</a></p>
+  </section>
+</div>
+<!-- Comma Operator -->
+<div class='slide' id='comma'>
+  <section class='smallerCode middle'>
+    <h2>You've probably used comma before</h2>
+    <pre class='brush:js;toolbar:false'>for (var i = 0, j = 9; i <= 9; i++, j--) {&#x000A;  document.writeln("a["+i+"]["+j+"] = " + a[i][j]);&#x000A;}</pre>
+    <h3>That is different than (not an operator here):</h3>
+    <pre class='brush:js;toolbar:false'>var i, l, foo, bar, baz;</pre>
+    <blockquote>Use it when you want multiple expressions in a location that requires a single expression.</blockquote>
+  </section>
+</div>
+<!-- Comma Awesome -->
+<div class='slide' id='comma-awesome'>
+  <header>
+    <h2>Wicked awesome usage (<a href="http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/">James Padolsey</a>)</h2>
+  </header>
+  <section class='smallerCode'>
+    <p>Detect IE in JS using conditional comments (No block in that while?!?)</p>
+    <pre class='brush:js;toolbar:false'>var ie = (function(){&#x000A;    var undef,&#x000A;        v = 3,&#x000A;        div = document.createElement('div'),&#x000A;        all = div.getElementsByTagName('i');&#x000A;&#x000A;    while (&#x000A;        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',&#x000A;        all[0]&#x000A;    );&#x000A;&#x000A;    return v > 4 ? v : undef;&#x000A;}());&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Hot debate ( equality ) -->
+<div class='slide' id='equality'>
+  <header>
+    <h1>Hot debate! <code>==</code> vs <code>===</code></h1>
+  </header>
+  <section>
+    <p>You know the difference. <code>==</code> attempts to coerce the values before comparison. So which should you use?</p>
+    <pre class='brush:js; toolbar:false'>0 === 0 // true&#x000A;0 == '0' // true&#x000A;0 === '0' // false&#x000A;0 == false // true&#x000A;0 == '' // true&#x000A;null == undefined // true&#x000A;null === undefined // false&#x000A;&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Benchmark without coercion -->
+<div class='slide' id='without-coercion'>
+  <section class='middle'>
+    <img alt='Equals benchmark without coercion' src='img/strict_equal_vs_equal.001.jpg' style='width:100%' />
+  </section>
+</div>
+<!-- Benchmark without coercion -->
+<div class='slide' id='with-coercion'>
+  <section class='middle'>
+    <img alt='Equals benchmark with coercion' src='img/strict_equal_vs_equal.002.jpg' style='width:100%' />
+  </section>
+</div>
+<!-- Strict equals -->
+<div class='slide' id='strict-equals'>
+  <header>
+    <h2>Short answer: strict equals (===) has better performance. <a href='http://jsperf.com/equal-vs-strict-equal' target='_blank'>JSPerf stats</a></h2>
+  </header>
+  <section class='lower'>
+    <ul>
+      <li>Chrome's V8 engine has significantly lower performance with double equal when type coercion does occur( overall performance is unmatched in V8 ).</li>
+      <li>Safari's JavascriptCore is odd. <code>==</code> wins for no type coercion and <code>===</code> wins with type coercion.</li>
+      <li>IE6-8 has consistently better performance with <code>===</code> whether type coercion is done or not.</li>
+      <li>Opera also has consistently better performance with <code>===</code>, but type coercion significantly slows both.</li>
+      <li>Firefox 3.6's Spidermonkey had similar results to Chrome, but obviously with lower numbers.</li>
+      <li>The new Firefox 4 js engine (jägermonkey) optimizes for ==, so it does win in this browser.</li>
+      <li>Strict equal(===) compresses to 1 byte just like (==) with gzip compression, so the argument that it takes up more space is not valid in that case.</li>
+    </ul>
+  </section>
+</div>
+<!-- Use bang instead -->
+<div class='slide' id='bang'>
+  <header>
+    <h1>Bang! (bam)</h1>
+    <p><code>==</code> is most often useful when doing comparison with null, also want to catch undefined.</p>
+  </header>
+  <section class='middle center'>
+    <img alt='Bambam' src='img/bambam.jpg' />
+    <h2>In most cases, it would also be useful for you to catch 0 and empty string...</h2>
+  </section>
+</div>
+<!-- Bang example -->
+<div class='slide' id='bang-example'>
+  <header>
+    <h1>!!example</h1>
+  </header>
+  <section class='smallerCode'>
+    <pre class='brush:js; toolbar:false'>function foo( arg ) {&#x000A;  if ( arg != null ) {&#x000A;    // Argument is present, but may be empty string or 0&#x000A;  }&#x000A;}&#x000A;function foo( arg ) {&#x000A;  if ( !!arg ) {&#x000A;    // Argument is valid&#x000A;  }&#x000A;}&#x000A;// Can be even shorter&#x000A;function foo( arg ) {&#x000A;  if ( arg ) {&#x000A;    // 0, '', null, and undefined are "falsy"&#x000A;  }&#x000A;}&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Strict equal adequacy -->
+<div class='slide' id='strict-adequacy'>
+  <header>
+    <h2>There are a few cases where <code>===</code> may not be adequate.</h2>
+  </header>
+  <section class='lower'>
+    <h3>String literal vs string object</h3>
+    <pre class='brush:js;toolbar:false'>"abc" == new String("abc") // true&#x000A;"abc" === new String("abc") // false</pre>
+    <p><code>==</code> will check the value, but they are not the same type.</p>
+    <pre class='brush:js; toolbar:false'>typeof "abc" // "string"&#x000A;typeof new String("abc") // "object"&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Paradoxical number -->
+<div class='slide' id='NaN'>
+  <header>
+    <h2>Side note: The paradoxical number (NaN)</h2>
+  </header>
+  <section class='middle'>
+    <pre class='brush:js;toolbar:false'>NaN == NaN // false&#x000A;typeof NaN === "number" // true&#x000A;&#x000A;var a = NaN;&#x000A;a == NaN || a === NaN // false&#x000A;&#x000A;isNaN( a ) // true, use this!</pre>
+    <p>This is why we need isNaN()</p>
+  </section>
+</div>
+<!-- Thanks -->
+<div class='slide' id='thanks'>
+  <section class='middle'>
+    <h1>Thanks</h1>
+    <ul class='none'>
+      <li><a href="http://twitter.com/#!/timmywil">@timmywil (Also in the #jquery irc)</a></li>
+      <li><a href="http://github.com/timmywil">Github</a></li>
+      <li><a href="http://timmywillison.com">timmywillison.com</a></li>
+    </ul>
+  </section>
+</div>
     </div>
   </div>
   <!-- presentation -->

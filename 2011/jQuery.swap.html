@@ -21,33 +21,33 @@
 </head>
 <body>
   <header id='header'>
-      <hgroup>
-        <a href='/' id='logo'>timmy willison</a>
-        <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
-        <nav class='start' id='nav'>
-          <ul>
-            <li>
-              <a href='/samples/password123/'>jQuery password123</a>
-            </li>
-            <li>
-              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
-            </li>
-            <li>
-              <a href='/pres/operators/'>Rare Javascript Operators</a>
-            </li>
-            <li>
-              <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
-            </li>
-            <li>
-              <a href='http://twitter.com/timmywil'>@timmywil</a>
-            </li>
-            <li>
-              <a href='http://github.com/timmywil'>Github</a>
-            </li>
-          </ul>
-        </nav>
-      </hgroup>
-    </header>
+  <hgroup>
+    <a href='/' id='logo'>timmy willison</a>
+    <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
+    <nav class='start' id='nav'>
+      <ul>
+        <li>
+          <a href='/samples/password123/'>jQuery password123</a>
+        </li>
+        <li>
+          <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+        </li>
+        <li>
+          <a href='/pres/operators/'>Rare Javascript Operators</a>
+        </li>
+        <li>
+          <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
+        </li>
+        <li>
+          <a href='http://twitter.com/timmywil'>@timmywil</a>
+        </li>
+        <li>
+          <a href='http://github.com/timmywil'>Github</a>
+        </li>
+      </ul>
+    </nav>
+  </hgroup>
+</header>
   <div id='container'>
     <section id='blog'>
       <article>
@@ -57,38 +57,41 @@
         </header>
         <div class='content'>
           <p>
-              Having recently delved into the deeper tunnels of the css component of the jQuery source, I had discovered a surprisingly useful internal jQuery function that may be of use to you: jQuery.swap. I&#8217;m sure we&#8217;ve all encountered issues retrieving consistent cross-browser css values with javascript.  I have written this function dozens of times and not realized that it was already in jQuery.
-            </p>
-            <div class='note'>
-              jQuery.swap's paramaters are an element, css properties in an object literal, and a callback function. It swaps the styles of the element you pass with the given css, calls your callback, then returns the element to its original style.<br>
-              Check out the source for <a target="_blank" href="http://bot-t.com/jquery.js#5779">swap</a>.
-            </div>
-            <p>
-              To demonstrate, I wrote a lightbox plugin for a site and needed to calculate it&#8217;s final position when opened. It does a flip css3 animation while expanding from a given point. I attach the necessary html for the lightbox given certain parameters on what content it should pull in and which element (an anchor) will be clicked to open it.  The lightbox is inserted after the anchor and by default, the lightbox expands as if out from behind the anchor it is attached to.
-            </p>
-            <p>
-              Having attached the lightbox, I want to allow the user to override it&#8217;s original position in their own css, so in order to retrieve accurate top/left values in Firefox 3, the lightbox could not be hidden or I would consistently get back 0.
-            </p>
-            <pre name="code" class="javascript">
-            var $lightbox = $('#lightbox'),
-                top, left;
-            // Temporarily swap visibility instead of display: none to get correct top/left in firefox 3
-            $.swap($lightbox[0],
-              { "display"   : "block",
-                "visibility": "hidden" },
-              function() {
-                top = $lightbox.css('top');
-                left = $lightbox.css('left');
-              });
-            </pre>
+  Having recently delved into the deeper tunnels of the css component of the jQuery source, I had discovered a surprisingly useful internal jQuery function that may be of use to you: jQuery.swap. I&#8217;m sure we&#8217;ve all encountered issues retrieving consistent cross-browser css values with javascript.  I have written this function dozens of times and not realized that it was already in jQuery.
+</p>
+<div class='note'>
+  jQuery.swap's paramaters are an element, css properties in an object literal, and a callback function. It swaps the styles of the element you pass with the given css, calls your callback, then returns the element to its original style.<br>
+  Check out the source for <a target="_blank" href="http://bot-t.com/jquery.js#5779">swap</a>.
+</div>
+<p>
+  To demonstrate, I wrote a lightbox plugin for a site and needed to calculate it&#8217;s final position when opened. It does a flip css3 animation while expanding from a given point. I attach the necessary html for the lightbox given certain parameters on what content it should pull in and which element (an anchor) will be clicked to open it.  The lightbox is inserted after the anchor and by default, the lightbox expands as if out from behind the anchor it is attached to.
+</p>
+<p>
+  Having attached the lightbox, I want to allow the user to override it&#8217;s original position in their own css, so in order to retrieve accurate top/left values in Firefox 3, the lightbox could not be hidden or I would consistently get back 0.
+</p>
+<pre name="code" class="javascript">
+var $lightbox = $('#lightbox'),
+    top, left;
+// Temporarily swap visibility instead of display: none to get correct top/left in firefox 3
+$.swap($lightbox[0],
+  { "display"   : "block",
+    "visibility": "hidden" },
+  function() {
+    top = $lightbox.css('top');
+    left = $lightbox.css('left');
+  });
+</pre>
         </div>
       </article>
     </section>
     <section id='sidebar'>
-        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
-          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
-        </a>
-      </section>
+      <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+        <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+      </a>
+      <a href='http://open.dapper.net/transform.php?dappName=TimmyWillisonsBlog&amp;transformer=RSS&amp;extraArg_title=Timmy_Willisons_Blog&amp;extraArg_pubDate=Blog_post_dates&amp;applyToUrl=http%3A%2F%2Ftimmywillison.com%2F' id='rss'>
+        RSS
+      </a>
+    </section>
     <footer id='footer'>
       <p>
         copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>

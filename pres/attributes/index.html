@@ -44,149 +44,149 @@
     <div id='presentation-counter'></div>
     <div class='slides'>
       <!-- Title -->
-      <div class='slide' id='landing'>
-        <section class='middle landing'>
-          <h1>Attributes and Properties in jQuery</h1>
-          <h4>by Timmy Willison</h4>
-        </section>
-      </div>
-      <!-- Who I Am -->
-      <!-- What Changed -->
-      <div class='slide' id='what-changed'>
-        <header>
-          <h1>WAT changed in jQuery 1.6?</h1>
-        </header>
-        <section>
-          <ul>
-            <li>Rewrite of <code>.attr()</code> and the addition of the <code>.prop()</code>/<code>.removeProp()</code> methods</li>
-            <li>Significant performance improvements in <code>.attr()</code>, <code>.val()</code>, and Event triggering</li>
-            <li>attrHooks, valHooks, propHooks, more flexible deferreds, relative css</li>
-          </ul>
-        </section>
-      </div>
-      <!-- What was the confusion? -->
-      <div class='slide' id='confusion'>
-        <header>
-          <h1>Previously, the <code>.attr()</code> method...</h1>
-        </header>
-        <section>
-          <ul>
-            <li>handled both attributes and properties in the same method</li>
-            <li>had several bugs and was hard to maintain. e.g. forms</li>
-            <li>inadvertently contributed to some developers missing out on a fundamental concept in javascript.</li>
-          </ul>
-        </section>
-      </div>
-      <!-- Difference between attributes and properties -->
-      <div class='slide' id='difference'>
-        <header>
-          <h1>So, what's the difference?</h1>
-        </header>
-        <section class='center'>
-          <br />
-          <pre class='brush:js;toolbar:false'>&lt;input class="foo"&gt; // attribute&#x000A;$('input')[0].className // property</pre>
-          <br />
-          <pre class='brush:js;toolbar:false'>&lt;input id="bar"&gt; // attribute&#x000A;$('#bar')[0].id // property</pre>
-          <blockquote>Attributes are in the html, parsed by the browser to form the DOM, and (generally) correspond to properties.</blockquote>
-        </section>
-      </div>
-      <!-- Facepalm -->
-      <div class='slide' id='facepalm'>
-        <header>
-          <h1>/facepalm</h1>
-        </header>
-        <section>
-          <p>These don't make sense in the world of attributes.</p>
-          <br />
-          <pre class='brush:js;toolbar:false'>$(window).attr...&#x000A;$(document).attr...&#x000A;$("input").attr("selectedIndex");&#x000A;$("#foo").attr("nodeType");&#x000A;$("#bar").attr("tagName");&#x000A;$("&lt;input&gt;").attr("type");&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Boolean attributes -->
-      <div class='slide' id='boolean'>
-        <header>
-          <h1>Boolean Attributes and Properties</h1>
-        </header>
-        <section>
-          <p>The spark of discussion, these are special. According to the <a href="http://www.w3.org/TR/html4/interact/forms.html#adef-value-INPUT">spec</a>, attributes such as checked do not map to properties of the same name.</p>
-          <i>The most common boolean attributes are checked, selected, readonly, and disabled</i>
-          <pre class='brush:js;toolbar:false'>&lt;input type="checkbox" checked="checked"&gt;&#x000A;// Maps to .defaultChecked (initial value)</pre>
-          <pre class='brush:js;toolbar:false'>$('input').attr('checked', true);&#x000A;// Didn't set the checked property in 1.6</pre>
-          <pre class='brush:js;toolbar:false'>// Do this instead&#x000A;$('input').prop('checked', true);&#x000A;$('input').prop('checked', false);&#x000A;&#x000A;</pre>
-        </section>
-      </div>
-      <!-- Boolean attributes example -->
-      <div class='slide' id='boolean-example'>
-        <header>
-          <h1><code>example === true</code></h1>
-        </header>
-        <section>
-          <p>jQuery is not being used to set the checkbox here.  This is to show that the native behavior of a checkbox as it is changed by the user does not keep the attribute up to date with the current value, just the property.</p>
-          <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/timmywil/ZJRzs/3/embedded/result,js,html"></iframe>
-        </section>
-      </div>
-      <!-- 1.6.1 -->
-      <div class='slide' id='jQuery_161'>
-        <header>
-          <h1>1.6.1 fixed compatibility</h1>
-        </header>
-        <section>
-          <ul class='smaller'>
-            <li>Changing boolean attributes with <code>.attr()</code> changes the property (still better to use <code>.prop()</code>)</li>
-            <li><code>.attr()</code> can be used on the window/document (just defers to <code>.prop()</code>)</li>
-            <li><strong>Note:</strong> Node properties such as selectedIndex, nodeName, tagName, and defaultValue are no longer retrievable with <code>.attr()</code>, but can now be retrieved with <code>.prop()</code>.</li>
-          </ul>
-        </section>
-      </div>
-      <!-- .attr("value") -->
-      <div class='slide' id='value'>
-        <header>
-          <h2>The value attribute is not what you think it is.</h2>
-        </header>
-        <section>
-          <p>To retrieve and set the current value of an input, <br>you need the value property</p>
-          <pre class='brush:js;toolbar:false'>$input.prop('value'); // Current value&#x000A;$input[0].getAttribute('value'); // Default value&#x000A;$input.attr('value');&#x000A;// Right now, retrieves the property, but this will be deprecated in 1.7.&#x000A;$input.val(); // Hey, there's a whole method devoted to value!</pre>
-          <br />
-          <a href='http://bugs.jquery.com/ticket/10383' target='_blank'>http://bugs.jquery.com/ticket/10383</a>
-        </section>
-      </div>
-      <!-- Summary -->
-      <div class='slide' id='summary'>
-        <header>
-          <h1>Summary</h1>
-        </header>
-        <section>
-          <blockquote>
-            Use the <code>.attr()</code> method for attributes and the <code>.prop()</code> method for properties. Often, they will be the same value, but if you want
-            any <b><i>current</i></b> values, meaning if it can change with user interaction, use <code>prop</code>.
-            In cases where it doesn't make a difference, <code>prop</code> will be faster.
-          </blockquote>
-        </section>
-      </div>
-      <!-- Preview -->
-      <div class='slide' id='preview'>
-        <header>
-          <h1>The Future of Attributes and Properties</h1>
-        </header>
-        <section class='middle'>
-          <br />
-          <ul>
-            <li>We are discussing deprecating the boolHook in jQuery 1.7 for removal in 1.8</li>
-            <li>Also, the value attrHook and tabIndex attrHook ( this will fix Sizzle bugs as well )</li>
-            <li>Gravitating towards a fully consistent API: <code>.attr()</code> for attributes and <code>.prop()</code> for properties</li>
-          </ul>
-        </section>
-      </div>
-      <!-- Thanks -->
-      <div class='slide' id='thanks'>
-        <section class='middle'>
-          <h1>Thanks!</h1>
-          <ul class='none'>
-            <li><a href="http://twitter.com/#!/timmywil">@timmywil</a> (Also in the #jquery irc)</li>
-            <li><a href="http://github.com/timmywil">Github</a></li>
-            <li>jQuery ♥ community. <a href="http://docs.jquery.com/Getting_Involved">Getting Involved</a></li>
-          </ul>
-        </section>
-      </div>
+<div class='slide' id='landing'>
+  <section class='middle landing'>
+    <h1>Attributes and Properties in jQuery</h1>
+    <h4>by Timmy Willison</h4>
+  </section>
+</div>
+<!-- Who I Am -->
+<!-- What Changed -->
+<div class='slide' id='what-changed'>
+  <header>
+    <h1>WAT changed in jQuery 1.6?</h1>
+  </header>
+  <section>
+    <ul>
+      <li>Rewrite of <code>.attr()</code> and the addition of the <code>.prop()</code>/<code>.removeProp()</code> methods</li>
+      <li>Significant performance improvements in <code>.attr()</code>, <code>.val()</code>, and Event triggering</li>
+      <li>attrHooks, valHooks, propHooks, more flexible deferreds, relative css</li>
+    </ul>
+  </section>
+</div>
+<!-- What was the confusion? -->
+<div class='slide' id='confusion'>
+  <header>
+    <h1>Previously, the <code>.attr()</code> method...</h1>
+  </header>
+  <section>
+    <ul>
+      <li>handled both attributes and properties in the same method</li>
+      <li>had several bugs and was hard to maintain. e.g. forms</li>
+      <li>inadvertently contributed to some developers missing out on a fundamental concept in javascript.</li>
+    </ul>
+  </section>
+</div>
+<!-- Difference between attributes and properties -->
+<div class='slide' id='difference'>
+  <header>
+    <h1>So, what's the difference?</h1>
+  </header>
+  <section class='center'>
+    <br />
+    <pre class='brush:js;toolbar:false'>&lt;input class="foo"&gt; // attribute&#x000A;$('input')[0].className // property</pre>
+    <br />
+    <pre class='brush:js;toolbar:false'>&lt;input id="bar"&gt; // attribute&#x000A;$('#bar')[0].id // property</pre>
+    <blockquote>Attributes are in the html, parsed by the browser to form the DOM, and (generally) correspond to properties.</blockquote>
+  </section>
+</div>
+<!-- Facepalm -->
+<div class='slide' id='facepalm'>
+  <header>
+    <h1>/facepalm</h1>
+  </header>
+  <section>
+    <p>These don't make sense in the world of attributes.</p>
+    <br />
+    <pre class='brush:js;toolbar:false'>$(window).attr...&#x000A;$(document).attr...&#x000A;$("input").attr("selectedIndex");&#x000A;$("#foo").attr("nodeType");&#x000A;$("#bar").attr("tagName");&#x000A;$("&lt;input&gt;").attr("type");&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Boolean attributes -->
+<div class='slide' id='boolean'>
+  <header>
+    <h1>Boolean Attributes and Properties</h1>
+  </header>
+  <section>
+    <p>The spark of discussion, these are special. According to the <a href="http://www.w3.org/TR/html4/interact/forms.html#adef-value-INPUT">spec</a>, attributes such as checked do not map to properties of the same name.</p>
+    <i>The most common boolean attributes are checked, selected, readonly, and disabled</i>
+    <pre class='brush:js;toolbar:false'>&lt;input type="checkbox" checked="checked"&gt;&#x000A;// Maps to .defaultChecked (initial value)</pre>
+    <pre class='brush:js;toolbar:false'>$('input').attr('checked', true);&#x000A;// Didn't set the checked property in 1.6</pre>
+    <pre class='brush:js;toolbar:false'>// Do this instead&#x000A;$('input').prop('checked', true);&#x000A;$('input').prop('checked', false);&#x000A;&#x000A;</pre>
+  </section>
+</div>
+<!-- Boolean attributes example -->
+<div class='slide' id='boolean-example'>
+  <header>
+    <h1><code>example === true</code></h1>
+  </header>
+  <section>
+    <p>jQuery is not being used to set the checkbox here.  This is to show that the native behavior of a checkbox as it is changed by the user does not keep the attribute up to date with the current value, just the property.</p>
+    <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/timmywil/ZJRzs/3/embedded/result,js,html"></iframe>
+  </section>
+</div>
+<!-- 1.6.1 -->
+<div class='slide' id='jQuery_161'>
+  <header>
+    <h1>1.6.1 fixed compatibility</h1>
+  </header>
+  <section>
+    <ul class='smaller'>
+      <li>Changing boolean attributes with <code>.attr()</code> changes the property (still better to use <code>.prop()</code>)</li>
+      <li><code>.attr()</code> can be used on the window/document (just defers to <code>.prop()</code>)</li>
+      <li><strong>Note:</strong> Node properties such as selectedIndex, nodeName, tagName, and defaultValue are no longer retrievable with <code>.attr()</code>, but can now be retrieved with <code>.prop()</code>.</li>
+    </ul>
+  </section>
+</div>
+<!-- .attr("value") -->
+<div class='slide' id='value'>
+  <header>
+    <h2>The value attribute is not what you think it is.</h2>
+  </header>
+  <section>
+    <p>To retrieve and set the current value of an input, <br>you need the value property</p>
+    <pre class='brush:js;toolbar:false'>$input.prop('value'); // Current value&#x000A;$input[0].getAttribute('value'); // Default value&#x000A;$input.attr('value');&#x000A;// Right now, retrieves the property, but this will be deprecated in 1.7.&#x000A;$input.val(); // Hey, there's a whole method devoted to value!</pre>
+    <br />
+    <a href='http://bugs.jquery.com/ticket/10383' target='_blank'>http://bugs.jquery.com/ticket/10383</a>
+  </section>
+</div>
+<!-- Summary -->
+<div class='slide' id='summary'>
+  <header>
+    <h1>Summary</h1>
+  </header>
+  <section>
+    <blockquote>
+      Use the <code>.attr()</code> method for attributes and the <code>.prop()</code> method for properties. Often, they will be the same value, but if you want
+      any <b><i>current</i></b> values, meaning if it can change with user interaction, use <code>prop</code>.
+      In cases where it doesn't make a difference, <code>prop</code> will be faster.
+    </blockquote>
+  </section>
+</div>
+<!-- Preview -->
+<div class='slide' id='preview'>
+  <header>
+    <h1>The Future of Attributes and Properties</h1>
+  </header>
+  <section class='middle'>
+    <br />
+    <ul>
+      <li>We are discussing deprecating the boolHook in jQuery 1.7 for removal in 1.8</li>
+      <li>Also, the value attrHook and tabIndex attrHook ( this will fix Sizzle bugs as well )</li>
+      <li>Gravitating towards a fully consistent API: <code>.attr()</code> for attributes and <code>.prop()</code> for properties</li>
+    </ul>
+  </section>
+</div>
+<!-- Thanks -->
+<div class='slide' id='thanks'>
+  <section class='middle'>
+    <h1>Thanks!</h1>
+    <ul class='none'>
+      <li><a href="http://twitter.com/#!/timmywil">@timmywil</a> (Also in the #jquery irc)</li>
+      <li><a href="http://github.com/timmywil">Github</a></li>
+      <li>jQuery ♥ community. <a href="http://docs.jquery.com/Getting_Involved">Getting Involved</a></li>
+    </ul>
+  </section>
+</div>
     </div>
   </div>
   <!-- presentation -->

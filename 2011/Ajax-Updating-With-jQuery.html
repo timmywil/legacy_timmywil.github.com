@@ -21,33 +21,33 @@
 </head>
 <body>
   <header id='header'>
-      <hgroup>
-        <a href='/' id='logo'>timmy willison</a>
-        <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
-        <nav class='start' id='nav'>
-          <ul>
-            <li>
-              <a href='/samples/password123/'>jQuery password123</a>
-            </li>
-            <li>
-              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
-            </li>
-            <li>
-              <a href='/pres/operators/'>Rare Javascript Operators</a>
-            </li>
-            <li>
-              <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
-            </li>
-            <li>
-              <a href='http://twitter.com/timmywil'>@timmywil</a>
-            </li>
-            <li>
-              <a href='http://github.com/timmywil'>Github</a>
-            </li>
-          </ul>
-        </nav>
-      </hgroup>
-    </header>
+  <hgroup>
+    <a href='/' id='logo'>timmy willison</a>
+    <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
+    <nav class='start' id='nav'>
+      <ul>
+        <li>
+          <a href='/samples/password123/'>jQuery password123</a>
+        </li>
+        <li>
+          <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+        </li>
+        <li>
+          <a href='/pres/operators/'>Rare Javascript Operators</a>
+        </li>
+        <li>
+          <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
+        </li>
+        <li>
+          <a href='http://twitter.com/timmywil'>@timmywil</a>
+        </li>
+        <li>
+          <a href='http://github.com/timmywil'>Github</a>
+        </li>
+      </ul>
+    </nav>
+  </hgroup>
+</header>
   <div id='container'>
     <section id='blog'>
       <article>
@@ -57,23 +57,26 @@
         </header>
         <div class='content'>
           <p>A common use case for ajax is the ajax updater. For simple updaters that do not handle large amounts of data, jQuery alone is sufficient in providing easy ajax updating.  Using an <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">IIFE</a> (which is generally preferred over setInterval), we can write an updater that checks for changes from the server at some interval.</p>
-            <iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/timmywil/zppLq/embedded/js%2Cresult"></iframe>
-            <p>The code above retrieves the homepage of <a href="http://jsfiddle.net">jsfiddle.net</a> and then retrieves all of the select elements. If you have something small on your page that needs to be updated periodically, this is probably the best way to go.  It would be easy enough to switch the use of load to any other jQuery ajax function.  For instance, loading JSON from twitter instead.</p>
-            <p>The following example uses jsonp to retrieve json from twitter at a set interval from the public stream.</p>
-            <div class='note'>
-              There is a limit on the number of calls you can make to the public stream without authentication. If this stops working, don't be surprised, but every IP gets 150 requests per hour.
-            </div>
-            <iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/timmywil/drFuW/embedded/js%2Cresult"></iframe>
-            <p>So you can see how easy it is to update with ajax using an IIFE.  However, there are many things you may want to take into account if you are doing larger requests with lots of data.  You want to limit DOM manipulation in those cases and should check whether the data is exactly the same before appending it to the DOM.  There are ajax updater plugins that do just that (or check for a 304 cached data response), such as <a href="https://github.com/RobertFischer/JQuery-PeriodicalUpdater/">jQuery Periodical Updater</a>.</p>
-            <p>Be good and have fun!</p>
+<iframe style="width: 100%; height: 200px" src="http://jsfiddle.net/timmywil/zppLq/embedded/js%2Cresult"></iframe>
+<p>The code above retrieves the homepage of <a href="http://jsfiddle.net">jsfiddle.net</a> and then retrieves all of the select elements. If you have something small on your page that needs to be updated periodically, this is probably the best way to go.  It would be easy enough to switch the use of load to any other jQuery ajax function.  For instance, loading JSON from twitter instead.</p>
+<p>The following example uses jsonp to retrieve json from twitter at a set interval from the public stream.</p>
+<div class='note'>
+  There is a limit on the number of calls you can make to the public stream without authentication. If this stops working, don't be surprised, but every IP gets 150 requests per hour.
+</div>
+<iframe style="width: 100%; height: 500px" src="http://jsfiddle.net/timmywil/drFuW/embedded/js%2Cresult"></iframe>
+<p>So you can see how easy it is to update with ajax using an IIFE.  However, there are many things you may want to take into account if you are doing larger requests with lots of data.  You want to limit DOM manipulation in those cases and should check whether the data is exactly the same before appending it to the DOM.  There are ajax updater plugins that do just that (or check for a 304 cached data response), such as <a href="https://github.com/RobertFischer/JQuery-PeriodicalUpdater/">jQuery Periodical Updater</a>.</p>
+<p>Be good and have fun!</p>
         </div>
       </article>
     </section>
     <section id='sidebar'>
-        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
-          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
-        </a>
-      </section>
+      <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+        <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+      </a>
+      <a href='http://open.dapper.net/transform.php?dappName=TimmyWillisonsBlog&amp;transformer=RSS&amp;extraArg_title=Timmy_Willisons_Blog&amp;extraArg_pubDate=Blog_post_dates&amp;applyToUrl=http%3A%2F%2Ftimmywillison.com%2F' id='rss'>
+        RSS
+      </a>
+    </section>
     <footer id='footer'>
       <p>
         copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>

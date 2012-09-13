@@ -21,50 +21,50 @@
 </head>
 <body>
   <header id='header'>
-      <hgroup>
-        <a href='/' id='logo'>timmy willison</a>
-        <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
-        <nav class='start' id='nav'>
-          <ul>
-            <li>
-              <a href='/samples/password123/'>jQuery password123</a>
-            </li>
-            <li>
-              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
-            </li>
-            <li>
-              <a href='/pres/operators/'>Rare Javascript Operators</a>
-            </li>
-            <li>
-              <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
-            </li>
-            <li>
-              <a href='http://twitter.com/timmywil'>@timmywil</a>
-            </li>
-            <li>
-              <a href='http://github.com/timmywil'>Github</a>
-            </li>
-          </ul>
-        </nav>
-      </hgroup>
-    </header>
+  <hgroup>
+    <a href='/' id='logo'>timmy willison</a>
+    <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
+    <nav class='start' id='nav'>
+      <ul>
+        <li>
+          <a href='/samples/password123/'>jQuery password123</a>
+        </li>
+        <li>
+          <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+        </li>
+        <li>
+          <a href='/pres/operators/'>Rare Javascript Operators</a>
+        </li>
+        <li>
+          <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
+        </li>
+        <li>
+          <a href='http://twitter.com/timmywil'>@timmywil</a>
+        </li>
+        <li>
+          <a href='http://github.com/timmywil'>Github</a>
+        </li>
+      </ul>
+    </nav>
+  </hgroup>
+</header>
   <div id='container'>
     <style type='text/css'>
-        label { display: block; font-size: 1.5em; margin: 0.5em 0; }
-        input { width: 930px; font-size: 2em; letter-spacing: 7px; }
-        button { float: right; }
-        #tests { float: right; margin: 1em 0; text-shadow: #7f7f7f 1px 1px; }
-        #submissions { position: absolute; top: 260px; color: #FF0011; font-size: 30px; }
-      </style>
-      <a href='http://github.com/timmywil/password123' id='github'>Available On Github</a>
-      <h1 class='red'>iPhone Style Password Fields For the Web</h1>
-      <form action='#' autocomplete='off' class='clearfix'>
-        <label for='iField0'>Enter a password and submit:</label>
-        <input id='password' maxlength='35' name='password' type='password' />
-        <button type='submit'>Go!</button>
-      </form>
-      <div id='submissions'></div>
-      <a href='qunit/test/index.html' id='tests'>Run Test Suite</a>
+      label { display: block; font-size: 1.5em; margin: 0.5em 0; }
+      input { width: 930px; font-size: 2em; letter-spacing: 7px; }
+      button { float: right; }
+      #tests { float: right; margin: 1em 0; text-shadow: #7f7f7f 1px 1px; }
+      #submissions { position: absolute; top: 260px; color: #FF0011; font-size: 30px; }
+    </style>
+    <a href='http://github.com/timmywil/password123' id='github'>Available On Github</a>
+    <h1 class='red'>iPhone Style Password Fields For the Web</h1>
+    <form action='#' autocomplete='off' class='clearfix'>
+      <label for='iField0'>Enter a password and submit:</label>
+      <input id='password' maxlength='35' name='password' type='password' />
+      <button type='submit'>Go!</button>
+    </form>
+    <div id='submissions'></div>
+    <a href='qunit/test/index.html' id='tests'>Run Test Suite</a>
     <footer id='footer'>
       <p>
         copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
@@ -81,21 +81,21 @@
   <script src='/js/plugins.js' type='text/javascript'></script>
   <script src='/js/script.js' type='text/javascript'></script>
   <script src='jquery.password123.js' type='text/javascript'></script>
-    <script type='text/javascript'>
-      //<![CDATA[
-        $(document).ready(function () {
-        	// Initialize plugin
-        	$('input:password').password123();
-        
-        	// Show form submissions on the page
-        	var submissions = $('#submissions');
-        	$('form').submit(function() {
-        		submissions.text( 'Would submit: ?' + $(this).serialize() );
-        		return false;
-        	});
-        });
-      //]]>
-    </script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      $(document).ready(function () {
+      	// Initialize plugin
+      	$('input:password').password123();
+      
+      	// Show form submissions on the page
+      	var submissions = $('#submissions');
+      	$('form').submit(function() {
+      		submissions.text( 'Would submit: ?' + $(this).serialize() );
+      		return false;
+      	});
+      });
+    //]]>
+  </script>
   <!--[if lt IE 7 ]>
     <script src="/js/libs/dd_belatedpng.js"></script>
     <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>

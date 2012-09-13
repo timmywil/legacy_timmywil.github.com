@@ -21,33 +21,33 @@
 </head>
 <body>
   <header id='header'>
-      <hgroup>
-        <a href='/' id='logo'>timmy willison</a>
-        <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
-        <nav class='start' id='nav'>
-          <ul>
-            <li>
-              <a href='/samples/password123/'>jQuery password123</a>
-            </li>
-            <li>
-              <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
-            </li>
-            <li>
-              <a href='/pres/operators/'>Rare Javascript Operators</a>
-            </li>
-            <li>
-              <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
-            </li>
-            <li>
-              <a href='http://twitter.com/timmywil'>@timmywil</a>
-            </li>
-            <li>
-              <a href='http://github.com/timmywil'>Github</a>
-            </li>
-          </ul>
-        </nav>
-      </hgroup>
-    </header>
+  <hgroup>
+    <a href='/' id='logo'>timmy willison</a>
+    <h2>Web developer, <a href="http://jquery.com/">jQuery</a> Core Team Member, <br><a id="html5" href="http://www.w3.org/html/logo/">html5</a>/<a href="http://css3please.com/">css3</a> fanatic</h2>
+    <nav class='start' id='nav'>
+      <ul>
+        <li>
+          <a href='/samples/password123/'>jQuery password123</a>
+        </li>
+        <li>
+          <a href='/samples/bubbles/'>jQuery Google Bubbles</a>
+        </li>
+        <li>
+          <a href='/pres/operators/'>Rare Javascript Operators</a>
+        </li>
+        <li>
+          <a href='/pres/attributes/'>Attributes &amp; Properties in jQuery</a>
+        </li>
+        <li>
+          <a href='http://twitter.com/timmywil'>@timmywil</a>
+        </li>
+        <li>
+          <a href='http://github.com/timmywil'>Github</a>
+        </li>
+      </ul>
+    </nav>
+  </hgroup>
+</header>
   <div id='container'>
     <section id='blog'>
       <article>
@@ -57,31 +57,34 @@
         </header>
         <div class='content'>
           <p>CSS3 is magical like unicorns.  I would say the horn of the unicorn is its ability to be replicated by some of the filters in IE.  The horn is majestic, but painful when applied to sensitive areas.  Filters in IE give us a way to replicate some of the power of css3 without javascript and without images.  However, filters come with their own problems.  The most common problem is probably the equivalent of <code>overflow: hidden</code> whenever a filter is applied in IE6-7.  Another, is mixing a gradient filter with border-radius in IE9.</p>
-            
-            <p>IE9 is a major improvement compared to its predecessors, but does not yet support css3 gradients.  It does, however, support border-radius.  A problem arises when you apply a filter to an element with border-radius.  The filter overrides the border-radius and you lose your rounded corners.  You should probably think of a filter as a commanding predator.  It will do stuff, but it will take over and kill puppies.</p>
-            
-            <p>Another workaround is to use <a href="http://abouthalf.com/2010/10/25/internet-explorer-9-gradients-with-rounded-corners/">SVG</a> to create a gradient background image.  This has the advantage of being supported in IE9 and the css is not too long or difficult. SVG does have more flexibility compared to a static image created in photoshop, but they take time to create.  So, for those on the go, we may have a quicker solution that does not require any extra files.</p>
-            
-            <blockquote><p>When in doubt, <strong>add a wrapper</strong>.</p></blockquote>
-            
-            <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/timmywil/epgpX/embedded/result,css,html"></iframe>
-            
-            
-            <p>You can fix the IE9 problem by simply wrapping your gradient and given that the border-radius instead and applying <code>overflow: hidden</code>.  The overflow: hidden is present in IE6-7 due to the filter as stated previously, but will still only be applied in those 3 browsers in the given example.  If you have a dropdown or need some equivalent behavior where overflow is needed, the best solution may be to have another div outside of the wrapper, but absolutely positioned on top of it.  Border-radius will still not work in IE6-8, but if you care about that, you'll need to look into javascript fallbacks or using images.</p>
-            
-            <p>If you look at the HTML, you'll notice I've added an IE conditional comment for the wrapper.  I only did it that way to make the fiddle.  I recommend using Paul Irish's <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">IE Conditional Comments</a>, a conditional stylesheet, or css hacks if absolutely necessary.</p>
-            
-            <p><em>Tip: <code>position:relative</code> or <code>absolute</code> will cause problems when combining overflow and border-radius, so best stick with <code>static</code> and use something like the wrapper div in the example for positioning relatively or absolutely.</em></p>
-            
-            <p><em>Update: The original solution did not clip correctly in Opera. This post has since been updated. Let me know if you see any more problems!</em></p>
+
+<p>IE9 is a major improvement compared to its predecessors, but does not yet support css3 gradients.  It does, however, support border-radius.  A problem arises when you apply a filter to an element with border-radius.  The filter overrides the border-radius and you lose your rounded corners.  You should probably think of a filter as a commanding predator.  It will do stuff, but it will take over and kill puppies.</p>
+
+<p>Another workaround is to use <a href="http://abouthalf.com/2010/10/25/internet-explorer-9-gradients-with-rounded-corners/">SVG</a> to create a gradient background image.  This has the advantage of being supported in IE9 and the css is not too long or difficult. SVG does have more flexibility compared to a static image created in photoshop, but they take time to create.  So, for those on the go, we may have a quicker solution that does not require any extra files.</p>
+
+<blockquote><p>When in doubt, <strong>add a wrapper</strong>.</p></blockquote>
+
+<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/timmywil/epgpX/embedded/result,css,html"></iframe>
+
+
+<p>You can fix the IE9 problem by simply wrapping your gradient and given that the border-radius instead and applying <code>overflow: hidden</code>.  The overflow: hidden is present in IE6-7 due to the filter as stated previously, but will still only be applied in those 3 browsers in the given example.  If you have a dropdown or need some equivalent behavior where overflow is needed, the best solution may be to have another div outside of the wrapper, but absolutely positioned on top of it.  Border-radius will still not work in IE6-8, but if you care about that, you'll need to look into javascript fallbacks or using images.</p>
+
+<p>If you look at the HTML, you'll notice I've added an IE conditional comment for the wrapper.  I only did it that way to make the fiddle.  I recommend using Paul Irish's <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">IE Conditional Comments</a>, a conditional stylesheet, or css hacks if absolutely necessary.</p>
+
+<p><em>Tip: <code>position:relative</code> or <code>absolute</code> will cause problems when combining overflow and border-radius, so best stick with <code>static</code> and use something like the wrapper div in the example for positioning relatively or absolutely.</em></p>
+
+<p><em>Update: The original solution did not clip correctly in Opera. This post has since been updated. Let me know if you see any more problems!</em></p>
         </div>
       </article>
     </section>
     <section id='sidebar'>
-        <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
-          <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
-        </a>
-      </section>
+      <a href='https://developer.mozilla.org/en/JavaScript/Guide' title='How To Learn JS'>
+        <img alt='How To Learn JS' height='280' src='http://static.jsconf.us/promotejsv.gif' width='160' />
+      </a>
+      <a href='http://open.dapper.net/transform.php?dappName=TimmyWillisonsBlog&amp;transformer=RSS&amp;extraArg_title=Timmy_Willisons_Blog&amp;extraArg_pubDate=Blog_post_dates&amp;applyToUrl=http%3A%2F%2Ftimmywillison.com%2F' id='rss'>
+        RSS
+      </a>
+    </section>
     <footer id='footer'>
       <p>
         copyright &copy; 2011 timmy willison | <a href="/licence/">licence</a>
