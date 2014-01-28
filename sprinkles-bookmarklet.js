@@ -1,8 +1,9 @@
 (function( document ) {
-	var docElem, body, docHeight;
+	var docElem, body, docHeight, docWidth;
 	docElem = document.documentElement;
 	body = document.body;
 	docHeight = docElem.clientHeight;
+	docWidth = docElem.clientWidth;
 	i = 20;
 	window.requestAnimationFrame = window.requestAnimationFrame ||
 		window.webkitRequestAnimationFrame ||
@@ -21,7 +22,7 @@
 		style.height = '5px';
 		style.position = 'absolute';
 		style.top = top + 'px';
-		style.left = 5 + (Math.random() * (docHeight - 7) | 0) + 'px';
+		style.left = 5 + (Math.random() * (docWidth - 7) | 0) + 'px';
 		style.backgroundColor = '#'+ Math.floor(Math.random() * 16777215).toString(16);
 		(function animateSprinkle() {
 			if (top > docHeight) {
