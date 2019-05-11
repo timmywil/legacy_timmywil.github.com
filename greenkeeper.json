@@ -1,0 +1,9 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "samples/password123/qunit/package.json"
+      ]
+    }
+  }
+}
